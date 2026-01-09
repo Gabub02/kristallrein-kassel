@@ -2,7 +2,9 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- WICHTIG: Mobile Optimierung im Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
     <title>KristallRein Kassel | Premium Gebäudereinigung & Unterhaltsreinigung</title>
     <meta name="description" content="Professionelle Gebäudereinigung in Kassel - Praxisreinigung, Büroreinigung, Bauendreinigung, Fensterreinigung. Jetzt kostenloses Angebot anfordern!">
     
@@ -244,6 +246,7 @@
         html {
             scroll-behavior: smooth;
             scroll-padding-top: 80px;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
@@ -1535,7 +1538,7 @@
             font-size: 0.9em;
         }
 
-        /* ===== RESPONSIVE DESIGN ===== */
+        /* ===== RESPONSIVE DESIGN - SPEZIELL FÜR HANDY OPTIMIERT ===== */
         @media (max-width: 1024px) {
             .hero-content h1 {
                 font-size: 3.2em;
@@ -1568,36 +1571,41 @@
             }
         }
 
+        /* ===== TABLET & MOBILE (768px und kleiner) ===== */
         @media (max-width: 768px) {
-            .container {
-                width: 95%;
-                padding: 0 15px;
-            }
-
+            /* Mobile Header Anpassungen */
             .header-container {
                 flex-wrap: wrap;
             }
 
+            /* Mobile Menu Button anzeigen */
             .mobile-menu-btn {
                 display: block;
+                width: 50px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1001;
             }
 
+            /* Navigation für Mobile */
             nav {
                 position: fixed;
-                top: 80px;
-                left: 0;
-                width: 100%;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
                 background: var(--dark);
-                padding: 20px;
-                transform: translateY(-100%);
-                opacity: 0;
-                transition: var(--transition);
-                box-shadow: var(--shadow);
+                padding: 100px 20px 30px;
+                transition: left 0.3s ease;
+                z-index: 1000;
+                overflow-y: auto;
             }
 
             nav.active {
-                transform: translateY(0);
-                opacity: 1;
+                left: 0;
             }
 
             nav ul {
@@ -1613,31 +1621,106 @@
                 display: block;
                 padding: 15px 0;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                font-size: 1.1em;
             }
 
-            .header-cta {
+            /* Overlay für Mobile Menu */
+            .menu-overlay {
                 display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                z-index: 999;
             }
 
+            .menu-overlay.active {
+                display: block;
+            }
+
+            /* Hero Section für Mobile */
             .hero-content h1 {
-                font-size: 2.5em;
+                font-size: 2.2em;
+                line-height: 1.2;
+                background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
             }
 
             .hero-content p {
                 font-size: 1.1em;
+                line-height: 1.5;
             }
 
             .hero-stats {
                 flex-direction: column;
-                gap: 20px;
+                gap: 25px;
+                margin-bottom: 35px;
+            }
+
+            .stat {
+                width: 100%;
+            }
+
+            .stat-number {
+                font-size: 2em;
             }
 
             .btn-group {
                 flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                padding: 16px 30px;
+                font-size: 1em;
+                text-align: center;
+                justify-content: center;
+            }
+
+            /* Services für Mobile */
+            .services {
+                padding: 80px 0;
+            }
+
+            .section-header {
+                margin-bottom: 50px;
+            }
+
+            .section-title {
+                font-size: 2.2em;
+            }
+
+            .section-subtitle {
+                font-size: 1.1em;
+                padding: 0 10px;
             }
 
             .services-grid {
                 grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .service-card {
+                padding: 30px 25px;
+            }
+
+            .service-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8em;
+            }
+
+            .service-card h3 {
+                font-size: 1.4em;
+            }
+
+            /* About für Mobile */
+            .about {
+                padding: 80px 0;
             }
 
             .about-content {
@@ -1645,88 +1728,255 @@
                 gap: 40px;
             }
 
+            .about-image-main {
+                height: 350px;
+            }
+
+            .about-text h2 {
+                font-size: 2.2em;
+            }
+
+            .usp-list li {
+                padding: 18px;
+                margin-bottom: 15px;
+            }
+
+            /* Gallery für Mobile */
+            .gallery {
+                padding: 80px 0;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .gallery-comparison {
+                height: 280px;
+                flex-direction: column;
+            }
+
+            .gallery-before, .gallery-after {
+                width: 100%;
+                height: 50%;
+                font-size: 1.2em;
+            }
+
+            .gallery-badge {
+                padding: 6px 15px;
+                font-size: 0.8em;
+            }
+
+            /* Social Media für Mobile */
+            .social-media {
+                padding: 80px 0;
+            }
+
+            .social-title {
+                font-size: 2em;
+            }
+
+            .social-platforms {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .platform-card {
+                padding: 30px 20px;
+            }
+
+            .social-exclusive {
+                padding: 30px 20px;
+            }
+
+            /* Contact für Mobile */
+            .contact {
+                padding: 80px 0;
+            }
+
             .contact-container {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
 
-            .section-title {
-                font-size: 2.2em;
+            .contact-method {
+                padding: 20px;
             }
 
+            .form-container {
+                padding: 30px 25px;
+            }
+
+            /* Footer für Mobile */
             .footer-content {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 35px;
             }
-            
-            .social-platforms {
-                grid-template-columns: 1fr;
+
+            /* Cookie Banner für Mobile */
+            .cookie-banner {
+                padding: 20px;
             }
-            
-            .social-title {
-                font-size: 2em;
-            }
-            
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
-            
-            .gallery-comparison {
-                height: 300px;
-                flex-direction: column;
-            }
-            
-            .gallery-before, .gallery-after {
-                width: 100%;
-                height: 50%;
-            }
-            
+
             .cookie-buttons {
                 flex-direction: column;
                 width: 100%;
+                gap: 10px;
             }
-            
+
             .cookie-btn {
                 width: 100%;
+                padding: 15px;
             }
-            
+
+            /* Legal Pages für Mobile */
             .legal-page {
-                padding: 120px 0 60px;
+                padding: 100px 0 50px;
             }
-            
+
             .legal-container {
                 padding: 30px 20px;
             }
-            
+
             .legal-header h1 {
                 font-size: 2em;
             }
+
+            /* Container Anpassung */
+            .container {
+                width: 92%;
+                padding: 0 15px;
+            }
+
+            /* Overlay für Mobile Menu */
+            body.menu-open {
+                overflow: hidden;
+            }
         }
 
+        /* ===== KLEINE HANDYS (480px und kleiner) ===== */
         @media (max-width: 480px) {
             .hero-content h1 {
-                font-size: 2em;
+                font-size: 1.9em;
+            }
+
+            .hero-content p {
+                font-size: 1em;
             }
 
             .section-title {
-                font-size: 1.8em;
+                font-size: 1.9em;
+            }
+
+            .section-subtitle {
+                font-size: 1em;
             }
 
             .service-card {
-                padding: 30px 20px;
+                padding: 25px 20px;
+            }
+
+            .service-card h3 {
+                font-size: 1.3em;
+            }
+
+            .about-text h2 {
+                font-size: 1.9em;
+            }
+
+            .usp-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1em;
+            }
+
+            .usp-content h4 {
+                font-size: 1.1em;
+            }
+
+            .gallery-comparison {
+                height: 240px;
+            }
+
+            .form-container {
+                padding: 25px 20px;
+            }
+
+            .form-header h3 {
+                font-size: 1.5em;
+            }
+
+            /* Floating Buttons für kleine Handys */
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                font-size: 1.7em;
+                bottom: 25px;
+                right: 20px;
+            }
+
+            .call-float {
+                width: 55px;
+                height: 55px;
+                font-size: 1.5em;
+                bottom: 25px;
+                left: 20px;
+            }
+
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1em;
+                bottom: 90px;
+                right: 20px;
+            }
+
+            /* Logo kleiner auf kleinen Handys */
+            .logo-text {
+                font-size: 1.5em;
+            }
+
+            .logo-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3em;
+            }
+
+            /* Button Anpassungen */
+            .btn {
+                padding: 15px 25px;
+                font-size: 0.95em;
+            }
+        }
+
+        /* ===== SEHR KLEINE HANDYS (unter 360px) ===== */
+        @media (max-width: 360px) {
+            .hero-content h1 {
+                font-size: 1.7em;
+            }
+
+            .section-title {
+                font-size: 1.7em;
+            }
+
+            .hero-badge, .section-badge {
+                padding: 6px 15px;
+                font-size: 0.85em;
             }
 
             .btn {
-                padding: 15px 30px;
-                font-size: 1em;
+                padding: 14px 20px;
+                font-size: 0.9em;
             }
-            
-            .social-exclusive {
-                padding: 30px 20px;
+
+            .whatsapp-float, .call-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
             }
-            
-            .form-container {
-                padding: 25px 20px;
+
+            .logo-text {
+                font-size: 1.3em;
             }
         }
     </style>
@@ -1747,6 +1997,9 @@
             </div>
         </div>
     </div>
+
+    <!-- ===== MOBILE MENU OVERLAY ===== -->
+    <div class="menu-overlay" id="menuOverlay"></div>
 
     <!-- ===== ULTRA PREMIUM HEADER ===== -->
     <header id="main-header">
@@ -1771,10 +2024,8 @@
             </nav>
 
             <div class="header-cta">
-                <a href="tel:+4915151816181" class="header-phone" aria-label="Jetzt anrufen">
-                    <i class="fas fa-phone-alt"></i>
-                    <span>+49 1515 1816181</span>
-                </a>
+                <!-- HIER IST DIE TELEFONNUMMER WEG - WIE DU GEWÜNSCHT HAST -->
+                <!-- Sie war bereits oben rechts und ist jetzt für Handys ausgeblendet -->
             </div>
 
             <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Menü öffnen">
@@ -2276,6 +2527,19 @@
         </div>
     </footer>
 
+    <!-- ===== FLOATING BUTTONS ===== -->
+    <a href="https://wa.me/4915151816181?text=Hallo%20KristallRein%20Kassel%2C%20ich%20interessiere%20mich%20f%C3%BCr%20Ihre%20Dienstleistungen." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Chat öffnen">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <a href="tel:+4915151816181" class="call-float" aria-label="Jetzt anrufen">
+        <i class="fas fa-phone-alt"></i>
+    </a>
+    
+    <button class="back-to-top" id="backToTop" aria-label="Nach oben scrollen">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     <!-- ===== RECHTLICHE SEITEN ===== -->
     <!-- Diese sind zunächst versteckt und werden über die Footer-Links aufgerufen -->
     
@@ -2540,12 +2804,16 @@
                 }
             });
 
-            // Mobile Menu Toggle
+            // ===== MOBILE MENU TOGGLE =====
             const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
             const mainNav = document.getElementById('main-nav');
+            const menuOverlay = document.getElementById('menuOverlay');
             
             mobileMenuToggle.addEventListener('click', function() {
                 mainNav.classList.toggle('active');
+                menuOverlay.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+                
                 const icon = mobileMenuToggle.querySelector('i');
                 if (mainNav.classList.contains('active')) {
                     icon.classList.remove('fa-bars');
@@ -2554,6 +2822,14 @@
                     icon.classList.remove('fa-times');
                     icon.classList.add('fa-bars');
                 }
+            });
+
+            // Overlay schließt Menü
+            menuOverlay.addEventListener('click', function() {
+                mainNav.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                mobileMenuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
             });
 
             // Smooth Scroll für Navigation
@@ -2568,6 +2844,14 @@
                         const legalPages = ['impressum', 'datenschutz', 'agb', 'cookies'];
                         
                         if (legalPages.includes(pageId)) {
+                            // Mobile Menu schließen
+                            if (mainNav.classList.contains('active')) {
+                                mainNav.classList.remove('active');
+                                menuOverlay.classList.remove('active');
+                                document.body.classList.remove('menu-open');
+                                mobileMenuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                            }
+                            
                             showLegalPage(pageId);
                             return;
                         }
@@ -2576,6 +2860,14 @@
                     const targetElement = document.querySelector(targetId);
                     
                     if (targetElement) {
+                        // Mobile Menu schließen
+                        if (mainNav.classList.contains('active')) {
+                            mainNav.classList.remove('active');
+                            menuOverlay.classList.remove('active');
+                            document.body.classList.remove('menu-open');
+                            mobileMenuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                        }
+                        
                         const headerHeight = header.offsetHeight;
                         const targetPosition = targetElement.offsetTop - headerHeight;
                         
@@ -2583,12 +2875,6 @@
                             top: targetPosition,
                             behavior: 'smooth'
                         });
-
-                        // Mobile Menu schließen
-                        if (mainNav.classList.contains('active')) {
-                            mainNav.classList.remove('active');
-                            mobileMenuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
-                        }
                     }
                 });
             });
@@ -2608,6 +2894,11 @@
                 // Footer verstecken
                 document.querySelector('footer').style.display = 'none';
                 
+                // Floating Buttons verstecken
+                document.querySelectorAll('.whatsapp-float, .call-float, .back-to-top').forEach(btn => {
+                    btn.style.display = 'none';
+                });
+                
                 // Gewünschte Seite anzeigen
                 const legalPage = document.getElementById(pageId);
                 if (legalPage) {
@@ -2616,12 +2907,6 @@
                         top: 0,
                         behavior: 'smooth'
                     });
-                }
-                
-                // Mobile Menu schließen
-                if (mainNav.classList.contains('active')) {
-                    mainNav.classList.remove('active');
-                    mobileMenuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
                 }
             }
             
@@ -2642,6 +2927,11 @@
                     
                     // Footer anzeigen
                     document.querySelector('footer').style.display = 'block';
+                    
+                    // Floating Buttons wieder anzeigen
+                    document.querySelectorAll('.whatsapp-float, .call-float, .back-to-top').forEach(btn => {
+                        btn.style.display = 'flex';
+                    });
                     
                     // Zur Startseite scrollen
                     window.scrollTo({
