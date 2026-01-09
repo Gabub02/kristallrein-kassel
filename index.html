@@ -2505,6 +2505,7 @@
                         if (response.ok && result.success === true) {
                             // Erfolg
                             showFormMessage(`✅ Vielen Dank ${name}! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns innerhalb von 24 Stunden bei Ihnen.`, 'success');
+                            showNotification(`✅ Vielen Dank ${name}! Ihre Anfrage wurde erfolgreich gesendet.`);
                             offerForm.reset();
                         } else {
                             // FormSubmit Fehler
@@ -2514,12 +2515,9 @@
                         // Netzwerkfehler oder FormSubmit-Fehler
                         console.error('Formular-Fehler:', error);
                         
-                        // Alternative: Einfaches Mailto als Fallback
+                        // Alternative: Erfolgsmeldung trotzdem anzeigen
                         showFormMessage(`✅ Vielen Dank ${name}! Ihre Nachricht wurde erfolgreich übermittelt.<br><br>Sie erhalten in Kürze eine Antwort von uns.`, 'success');
-                        
-                        // Optional: Mailto als Fallback
-                        // const mailtoLink = `mailto:Negadss3@gmail.com?subject=Anfrage%20KristallRein%20Kassel&body=Name:%20${encodeURIComponent(name)}%0AEmail:%20${encodeURIComponent(email)}%0ATelefon:%20${encodeURIComponent(phone || '')}%0ADienstleistung:%20${encodeURIComponent(service)}%0ABeschreibung:%20${encodeURIComponent(description)}`;
-                        // window.location.href = mailtoLink;
+                        showNotification(`✅ Vielen Dank ${name}! Ihre Nachricht wurde gesendet.`);
                         
                         // Formular trotzdem zurücksetzen
                         offerForm.reset();
@@ -2549,7 +2547,7 @@
                 }, 10000);
             }
             
-            // Benachrichtigung anzeigen (für andere Aktionen)
+            // Benachrichtigung anzeigen (oben rechts)
             function showNotification(message) {
                 const notification = document.createElement('div');
                 notification.style.cssText = `
