@@ -1,0 +1,10 @@
+# Robots.txt für KristallRein Kassel
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://kristallrein-kassel.de/sitemap.xml
+
+# Disallow Admin Bereiche (falls vorhanden)
+Disallow: /admin/
+Disallow: /private/
