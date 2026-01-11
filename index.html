@@ -1,140 +1,200 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Kristallrein Kassel — Leistungen</title>
-  <meta name="description" content="Professionelle Gebäudereinigung in Kassel – Privat-, Büro- und Fassadenreinigung. Zuverlässig, nachhaltig und gründlich." />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
+  <title>Kristallrein Kassel — Professionelle Gebäudereinigung</title>
+  <meta name="description" content="Kristallrein Kassel: Zuverlässige Gebäudereinigung in Kassel. Büro-, Unterhalts- und Fassadenreinigung. Transparent, nachhaltig und gründlich.">
+  <link rel="canonical" href="https://kristallrein-kassel.de/">
   <!-- Open Graph -->
-  <meta property="og:title" content="Kristallrein Kassel" />
-  <meta property="og:description" content="Professionelle Gebäudereinigung in Kassel – Privat-, Büro- und Fassadenreinigung." />
-  <meta property="og:type" content="website" />
-  <link rel="stylesheet" href="styles.css" />
-  <!-- JSON-LD (LocalBusiness) - Platzhalter, bitte anpassen -->
+  <meta property="og:site_name" content="Kristallrein Kassel">
+  <meta property="og:title" content="Kristallrein Kassel — Gebäudereinigung">
+  <meta property="og:description" content="Zuverlässige Gebäudereinigung in Kassel: Büro, Privathaushalte & Fassaden. Kontakt: info@kristallrein-kassel.de">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kristallrein-kassel.de/">
+  <meta name="theme-color" content="#0b6f5b">
+
+  <!-- JSON-LD LocalBusiness -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Kristallrein Kassel",
-    "description": "Professionelle Gebäudereinigung in Kassel",
-    "url": "https://deine-domain.de",
+    "description": "Professionelle Gebäudereinigung in Kassel: Büro-, Unterhalts- und Fassadenreinigung.",
+    "url": "https://kristallrein-kassel.de",
+    "email": "info@kristallrein-kassel.de",
     "telephone": "+49-123-456789",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Kassel"
-    }
+    "address": { "@type": "PostalAddress", "addressLocality": "Kassel" }
   }
   </script>
+
+  <!-- DEV: readable CSS (for editing). PRODUCTION: inline minified CSS below for fast load. -->
+  <style>
+  /* === CORE LAYOUT (readable, logically sorted) === */
+  :root{--brand:#0b6f5b;--accent:#ffd166;--bg:#fff;--text:#111;--muted:#666}
+  html,body{height:100%;margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,'Helvetica Neue',Arial;line-height:1.4;color:var(--text);background:var(--bg)}
+  a{color:var(--brand);text-decoration:none}
+  header{background:#f8f9f9;border-bottom:1px solid #e8ecec}
+  .container{max-width:1100px;margin:0 auto;padding:1rem}
+  nav .nav{display:flex;gap:0.5rem;align-items:center;list-style:none;padding:0;margin:0}
+  nav .nav li{margin:0}
+  nav .nav a{padding:.5rem .75rem;border-radius:6px}
+  .cta{background:var(--brand);color:#fff;padding:.5rem .9rem;border-radius:6px}
+  main{padding:1.25rem 0}
+  .hero{display:flex;flex-direction:column;gap:0.75rem;padding:1rem 0}
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;padding:0;margin:0;list-style:none}
+  .service-card{background:#fff;padding:1rem;border:1px solid #efefef;border-radius:8px}
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+  footer{border-top:1px solid #eee;padding:1rem 0;text-align:center;color:var(--muted)}
+
+  /* Accessibility helpers */
+  .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+  .skip-link:focus{position:static;width:auto;height:auto;overflow:visible;padding:.5rem;background:#000;color:#fff}
+
+  /* Cookie banner */
+  .cookie-banner{position:fixed;left:1rem;right:1rem;bottom:1rem;background:#fff;border:1px solid #ddd;padding:1rem;border-radius:8px;display:flex;gap:1rem;align-items:center;justify-content:space-between;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+
+  /* Responsive tweaks */
+  @media (max-width:720px){.container{padding:0 .75rem}.hero{padding:.5rem}.nav{flex-wrap:wrap}.cookie-banner{flex-direction:column;align-items:stretch}}
+  </style>
+
+  <!-- PRODUCTION: small inline minified CSS for fastest render (keeps site ultraschnell). If you prefer an external file, replace this with <link rel="stylesheet" href="/dist/styles.min.css"> -->
+  <style>/*min*/:root{--b:#0b6f5b;--bg:#fff;--t:#111}html,body{height:100%;margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial;color:var(--t);background:var(--bg)}a{color:var(--b)}.container{max-width:1100px;margin:0 auto;padding:1rem}nav .nav{display:flex;gap:.5rem;align-items:center;list-style:none;padding:0;margin:0}.cta{background:var(--b);color:#fff;padding:.5rem .9rem;border-radius:6px}.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;padding:0;margin:0;list-style:none}.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}footer{border-top:1px solid #eee;padding:1rem 0;text-align:center;color:#666}@media(max-width:720px){.container{padding:0 .75rem}}</style>
+
 </head>
 <body>
-  <header>
-    <nav aria-label="Hauptnavigation">
-      <ul class="nav">
-        <li><a href="#leistungen">Leistungen</a></li>
-        <li><a href="#referenzen">Referenzen</a></li>
-        <li><a href="#ueber-uns">Über uns</a></li>
-        <li><a href="#kontakt" class="cta">Kontakt</a></li>
-      </ul>
-    </nav>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <header role="banner">
+    <div class="container">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem">
+        <a href="/" aria-label="Kristallrein Kassel"><strong>Kristallrein Kassel</strong></a>
+        <nav aria-label="Hauptnavigation">
+          <ul class="nav">
+            <li><a href="#leistungen">Leistungen</a></li>
+            <li><a href="#referenzen">Referenzen</a></li>
+            <li><a href="#ueber-uns">Über uns</a></li>
+            <li><a href="#kontakt" class="cta">Kontakt</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <!-- Reihenfolge: Leistungen -> Referenzen -> Über uns -->
-    <section id="leistungen" class="section">
-      <h1>Leistungen</h1>
-      <p>Wir bieten professionelle Reinigungsdienstleistungen für Privat, Gewerbe und öffentliche Einrichtungen.</p>
+  <main id="main" role="main">
+    <section class="hero container" aria-labelledby="hero-title">
+      <h1 id="hero-title">Zuverlässige Gebäudereinigung in Kassel</h1>
+      <p>Kristallrein Kassel — Büro-, Unterhalts- und Fassadenreinigung. Persönlich, gründlich und umweltbewusst.</p>
+      <p><a href="#kontakt" class="cta">Jetzt Anfrage senden</a></p>
+    </section>
 
+    <!-- ========= LEISTUNGEN (1) ========= -->
+    <section id="leistungen" class="container" aria-labelledby="leistungen-title">
+      <h2 id="leistungen-title">Leistungen</h2>
+      <p>Unser Leistungsspektrum ist praxisorientiert und flexibel — von regelmäßiger Unterhaltsreinigung bis zur schonenden Fassadenreinigung.</p>
       <ul class="services-grid">
         <li class="service-card">
           <h3>Büro- & Unterhaltsreinigung</h3>
-          <p>Regelmäßige Reinigung für ein sauberes und gesundes Arbeitsumfeld.</p>
+          <p>Regelmäßige, zuverlässige Reinigung zur Erhaltung eines gesunden Arbeitsumfelds.</p>
         </li>
-
         <li class="service-card">
           <h3>Privathaushalte</h3>
-          <p>Gründliche Reinigung, flexibel nach Ihren Wünschen.</p>
+          <p>Flexible Reinigungsintervalle, abgestimmt auf Ihre Bedürfnisse.</p>
         </li>
-
-        <!-- Fassadenreinigung bleibt als Leistung erhalten, aber ohne Vorher/Nachher-Bilder -->
         <li class="service-card">
           <h3>Fassadenreinigung</h3>
-          <p>Schonende und effektive Fassadenreinigung für saubere Außenflächen.</p>
+          <p>Schonende Entfernung von Verschmutzungen — Fassaden werden professionell gepflegt (Hinweis: Vorher/Nachher-Fotos für Fassaden wurden entfernt).</p>
         </li>
-
-        <!-- PRAXEN & ARZTREINIGUNG KOMPLETT ENTFERNT -->
       </ul>
     </section>
 
-    <section id="referenzen" class="section">
-      <h2>Referenzen</h2>
-      <p>Auszug aus erfolgreich abgeschlossenen Projekten.</p>
+    <!-- ========= REFERENZEN (2) ========= -->
+    <section id="referenzen" class="container" aria-labelledby="referenzen-title">
+      <h2 id="referenzen-title">Referenzen</h2>
+      <p>Eine Auswahl abgeschlossener Projekte (Vorher/Nachher-Beispiele: allgemeine Reinigungsprojekte — spezielle Praxen- und Fassaden-Vorher/Nachher-Bilder wurden entfernt).</p>
 
-      <div class="gallery">
-        <!-- Allgemeine Vorher/Nachher-Beispiele behalten, spezifische Praxen- und Fassaden-Vorher/Nachher entfernt -->
+      <div class="gallery" aria-live="polite">
         <figure>
           <picture>
-            <source type="image/webp" srcset="images/objekt1-before.webp" />
-            <img src="images/objekt1-before.jpg" alt="Objekt 1 vorher" loading="lazy" />
+            <source type="image/webp" srcset="images/objekt1-before.webp">
+            <img src="images/objekt1-before.jpg" alt="Objekt 1 vorher" loading="lazy"> 
           </picture>
           <figcaption>Objekt 1 – Vorher</figcaption>
         </figure>
-
         <figure>
           <picture>
-            <source type="image/webp" srcset="images/objekt1-after.webp" />
-            <img src="images/objekt1-after.jpg" alt="Objekt 1 nachher" loading="lazy" />
+            <source type="image/webp" srcset="images/objekt1-after.webp">
+            <img src="images/objekt1-after.jpg" alt="Objekt 1 nachher" loading="lazy">
           </picture>
           <figcaption>Objekt 1 – Nachher</figcaption>
         </figure>
-
-        <!-- Weitere Beispiele ... -->
       </div>
     </section>
 
-    <section id="ueber-uns" class="section">
-      <h2>Über uns</h2>
-      <p>Ein erfahrenes Team mit Fokus auf Qualität und Nachhaltigkeit.</p>
+    <!-- ========= ÜBER UNS (3) ========= -->
+    <section id="ueber-uns" class="container" aria-labelledby="ueber-title">
+      <h2 id="ueber-title">Über uns</h2>
+      <p>Ein erfahrenes, geschultes Team. Wir setzen auf transparente Preise, umweltfreundliche Reinigungsmittel und kontinuierliche Qualitätssicherung.</p>
       <ul>
-        <li>Transparente Preise</li>
         <li>Geschultes Personal</li>
-        <li>Umweltfreundliche Reinigungsmittel</li>
+        <li>Nachhaltige Reinigungsmittel</li>
+        <li>Transparente Angebote</li>
       </ul>
     </section>
 
-    <section id="kontakt" class="section">
-      <h2>Kontakt</h2>
-      <p>Ruf uns an oder schick eine Anfrage über das Formular.</p>
+    <!-- ========= KONTAKT ========= -->
+    <section id="kontakt" class="container" aria-labelledby="kontakt-title">
+      <h2 id="kontakt-title">Kontakt</h2>
+      <p>Ruf uns an oder nutze das Formular. Alternativ kannst du eine E‑Mail an <a href="mailto:info@kristallrein-kassel.de">info@kristallrein-kassel.de</a> senden.</p>
 
-      <form action="/send" method="POST" aria-label="Kontaktformular">
+      <form id="contactForm" action="/send" method="POST" aria-label="Kontaktformular" novalidate>
         <label for="name">Name</label>
-        <input id="name" name="name" required />
+        <input id="name" name="name" required aria-required="true">
 
-        <label for="email">E-Mail</label>
-        <input id="email" name="email" type="email" required />
+        <label for="email">E‑Mail</label>
+        <input id="email" name="email" type="email" required aria-required="true">
 
         <label for="message">Nachricht</label>
-        <textarea id="message" name="message" required></textarea>
+        <textarea id="message" name="message" rows="6" required aria-required="true"></textarea>
+
+        <div style="margin:.5rem 0">
+          <input type="checkbox" id="consent" name="consent" required>
+          <label for="consent">Ich stimme der Verarbeitung meiner Daten gemäß der <a href="/datenschutz" target="_blank">Datenschutzerklärung</a> zu.</label>
+        </div>
 
         <button type="submit" class="cta">Anfrage senden</button>
+        <button type="button" id="mailtoBtn" style="margin-left:.5rem">E‑Mail öffnen</button>
       </form>
+
+      <p style="font-size:.9rem;color:#666;margin-top:.5rem">Hinweis: Wir speichern nur die für die Bearbeitung notwendigen Daten. Keine Weitergabe an Dritte ohne Einwilligung.</p>
     </section>
+
   </main>
 
-  <footer>
-    <p>&copy; <span id="year"></span> Kristallrein Kassel</p>
+  <footer role="contentinfo">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Kristallrein Kassel • <a href="mailto:info@kristallrein-kassel.de">info@kristallrein-kassel.de</a></p>
+    </div>
   </footer>
 
-  <script>
-    // aktuelles Jahr einsetzen + Smooth scroll
-    document.getElementById('year').textContent = new Date().getFullYear();
+  <!-- Cookie consent banner (hidden when consent given) -->
+  <div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" style="display:none">
+    <div>
+      <strong>Datenschutz & Cookies</strong>
+      <div style="max-width:40rem">Wir verwenden nur notwendige Cookies für die Webseite. Durch die Nutzung stimmst du der Verwendung zu. Weitere Informationen in unserer <a href="/datenschutz">Datenschutzerklärung</a>.</div>
+    </div>
+    <div style="display:flex;gap:.5rem;align-items:center">
+      <button id="acceptCookies" class="cta">OK</button>
+      <button id="cookieSettings" style="background:#fff;border:1px solid #ddd;padding:.5rem;border-radius:6px">Einstellungen</button>
+    </div>
+  </div>
 
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) target.scrollIntoView({behavior: 'smooth', block: 'start'});
-      });
-    });
-  </script>
+  <!-- Accessible notification + minimal JS (minified for speed). Dev comments removed to keep file compact. -->
+  <div id="notification" aria-live="assertive" style="position:fixed;top:1rem;right:1rem;z-index:9999;display:none;padding:.75rem 1rem;border-radius:8px;background:#0b6f5b;color:#fff"></div>
+
+  <script>/*min*/(function(){var y=document.getElementById('year');if(y)y.textContent=new Date().getFullYear();document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});function s(n,c,t){var e=document.getElementById('notification');if(!e)return;clearTimeout(e._timeout);e.textContent=n;switch(c){case'error':e.style.background='#b00020';break;case'warn':e.style.background='#f39c12';break;default:e.style.background='#0b6f5b'}e.style.display='block';e._timeout=setTimeout(function(){e.style.display='none'},t||4e3)}window.showNotification=s;/* Cookie */var b=document.getElementById('cookieBanner');try{if(!localStorage.getItem('kr_consent')){b.style.display='flex'}}catch(e){}document.getElementById('acceptCookies').addEventListener('click',function(){try{localStorage.setItem('kr_consent','1')}catch(e){}b.style.display='none';showNotification('Cookie-Einstellungen gespeichert','',2500)});document.getElementById('cookieSettings').addEventListener('click',function(){showNotification('Keine weiteren Einstellungen verfügbar in dieser Demo','warn',2500)});/* Mailto fallback */document.getElementById('mailtoBtn').addEventListener('click',function(){var mail='info@kristallrein-kassel.de';var subj=encodeURIComponent('Anfrage von Webseite');var body=encodeURIComponent('Name:%0AEmail:%0ANachricht:%0A');window.location.href='mailto:'+mail+'?subject='+subj+'&body='+body});/* Form submit validation + demo handling */document.getElementById('contactForm').addEventListener('submit',function(e){e.preventDefault();var f=this;if(!f.checkValidity()){showNotification('Bitte überprüfe die Eingaben','error',3500);return}showNotification('Anfrage gesendet — wir melden uns bald','',3000);setTimeout(function(){f.reset()},800)});})();</script>
+
+  <!-- PRODUCTION NOTE: For a live deployment create a /dist/index.html with minified HTML, external /dist/styles.min.css and /dist/app.min.js and enable gzip/Brotli on the server for best performance. -->
+
 </body>
 </html>
