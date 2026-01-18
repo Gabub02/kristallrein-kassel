@@ -1528,6 +1528,29 @@
                 width: 45px;
                 height: 45px;
             }
+
+            /* Mobile Optimierung für Legal Modal */
+            .legal-modal-content {
+                width: 95%;
+                max-height: 85vh;
+                padding: 25px 15px;
+            }
+
+            .legal-modal-close {
+                top: 10px;
+                right: 10px;
+                font-size: 1.5em;
+            }
+
+            /* Social Media Cards Mobile */
+            .social-platforms {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .platform-card {
+                padding: 30px 20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1553,6 +1576,108 @@
                 width: 45px;
                 height: 45px;
                 font-size: 1.3em;
+            }
+        }
+
+        /* ===== LEGAL MODAL ===== */
+        .legal-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .legal-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .legal-modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s ease;
+            margin: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .legal-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text);
+            transition: var(--transition);
+        }
+
+        .legal-modal-close:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        .legal-modal-content h2 {
+            font-size: 2.2em;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 30px;
+        }
+
+        .legal-modal-content h3 {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--dark);
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .legal-modal-content p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .legal-modal-content ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .legal-modal-content li {
+            line-height: 1.8;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        @media (max-width: 768px) {
+            .legal-modal-content {
+                padding: 30px 20px;
+                margin: 10px;
+                max-height: 90vh;
+            }
+
+            .legal-modal-content h2 {
+                font-size: 1.8em;
             }
         }
     </style>
@@ -1786,7 +1911,7 @@
                     <div class="section-badge">Warum KristallRein Kassel?</div>
                     <h2>Ihr Partner für makellose Sauberkeit</h2>
                     
-                    <p>Wir sind <strong>KristallRein Kassel</strong> – ein eingespieltes Team von vier leidenschaftlichen Reinigungsexperten. Während andere hetzen, nehmen wir uns die Zeit, die es braucht, um jedes Detail perfekt zu machen.</p>
+                    <p>Wir sind <strong>KristallRein Kassel</strong> – ein eingespieltes Team leidenschaftlicher Reinigungsexperten. Während andere hetzen, nehmen wir uns die Zeit, die es braucht, um jedes Detail perfekt zu machen.</p>
 
                     <ul class="usp-list">
                         <li>
@@ -1845,29 +1970,31 @@
             </div>
 
             <div class="social-platforms">
-                <div class="platform-card instagram">
+                <!-- WICHTIG: Passe diese Links an deine echten Social Media Profile an! -->
+                <!-- Ersetze die URLs mit deinen tatsächlichen Social Media Links -->
+                <a href="https://www.instagram.com/kristallrein_kassel" target="_blank" rel="noopener noreferrer" class="platform-card instagram">
                     <div class="platform-icon">
                         <i class="fab fa-instagram"></i>
                     </div>
                     <h3>Instagram</h3>
                     <p>Before/After Bilder & Stories</p>
-                </div>
+                </a>
 
-                <div class="platform-card facebook">
+                <a href="https://www.facebook.com/kristallrein.kassel" target="_blank" rel="noopener noreferrer" class="platform-card facebook">
                     <div class="platform-icon">
                         <i class="fab fa-facebook-f"></i>
                     </div>
                     <h3>Facebook</h3>
                     <p>Bewertungen & Updates</p>
-                </div>
+                </a>
 
-                <div class="platform-card tiktok">
+                <a href="https://www.tiktok.com/@kristallrein_kassel" target="_blank" rel="noopener noreferrer" class="platform-card tiktok">
                     <div class="platform-icon">
                         <i class="fab fa-tiktok"></i>
                     </div>
                     <h3>TikTok</h3>
                     <p>Reinigungs-Videos & Trends</p>
-                </div>
+                </a>
             </div>
 
             <div class="social-exclusive">
@@ -2030,9 +2157,9 @@
                 <div class="footer-section">
                     <h3 class="footer-heading">Rechtliches</h3>
                     <ul class="footer-links">
-                        <li><a href="#impressum">Impressum</a></li>
-                        <li><a href="#datenschutz">Datenschutz</a></li>
-                        <li><a href="#agb">AGB</a></li>
+                        <li><a href="javascript:void(0);" onclick="showLegalModal('impressum')">Impressum</a></li>
+                        <li><a href="javascript:void(0);" onclick="showLegalModal('datenschutz')">Datenschutz</a></li>
+                        <li><a href="javascript:void(0);" onclick="showLegalModal('agb')">AGB</a></li>
                     </ul>
                 </div>
             </div>
@@ -2056,8 +2183,198 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
+    <!-- ===== LEGAL MODAL ===== -->
+    <div class="legal-modal" id="legalModal">
+        <div class="legal-modal-content">
+            <button class="legal-modal-close" onclick="closeLegalModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="legalContent"></div>
+        </div>
+    </div>
+
     <!-- ===== JAVASCRIPT ===== -->
     <script>
+        // Legal Modal Functions
+        function showLegalModal(type) {
+            const modal = document.getElementById('legalModal');
+            const content = document.getElementById('legalContent');
+            
+            let html = '';
+            
+            if (type === 'impressum') {
+                html = `
+                    <h2>Impressum</h2>
+                    <h3>Angaben gemäß § 5 TMG</h3>
+                    <p><strong>KristallRein Kassel</strong><br>
+                    Kasseler Straße 9<br>
+                    34314 Espenau</p>
+                    
+                    <h3>Kontakt</h3>
+                    <p>Telefon: +49 1515 1816181<br>
+                    E-Mail: info@kristallrein-kassel.de</p>
+                    
+                    <h3>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h3>
+                    <p>KristallRein Kassel<br>
+                    Kasseler Straße 9<br>
+                    34314 Espenau</p>
+                    
+                    <h3>EU-Streitschlichtung</h3>
+                    <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: 
+                    <a href="https://ec.europa.eu/consumers/odr/" target="_blank" style="color: var(--primary);">https://ec.europa.eu/consumers/odr/</a><br>
+                    Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+                    
+                    <h3>Verbraucher­streit­beilegung/Universal­schlichtungs­stelle</h3>
+                    <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer 
+                    Verbraucherschlichtungsstelle teilzunehmen.</p>
+                `;
+            } else if (type === 'datenschutz') {
+                html = `
+                    <h2>Datenschutzerklärung</h2>
+                    
+                    <h3>1. Datenschutz auf einen Blick</h3>
+                    <h4>Allgemeine Hinweise</h4>
+                    <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen 
+                    Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen 
+                    Sie persönlich identifiziert werden können.</p>
+                    
+                    <h3>2. Datenerfassung auf dieser Website</h3>
+                    <h4>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</h4>
+                    <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten 
+                    können Sie dem Impressum dieser Website entnehmen.</p>
+                    
+                    <h4>Wie erfassen wir Ihre Daten?</h4>
+                    <p>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich 
+                    z.B. um Daten handeln, die Sie in ein Kontaktformular eingeben.</p>
+                    <p>Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere 
+                    IT-Systeme erfasst. Das sind vor allem technische Daten (z.B. Internetbrowser, Betriebssystem oder 
+                    Uhrzeit des Seitenaufrufs).</p>
+                    
+                    <h4>Wofür nutzen wir Ihre Daten?</h4>
+                    <p>Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. 
+                    Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.</p>
+                    
+                    <h4>Welche Rechte haben Sie bezüglich Ihrer Daten?</h4>
+                    <p>Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer 
+                    gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung 
+                    oder Löschung dieser Daten zu verlangen.</p>
+                    
+                    <h3>3. Kontaktformular</h3>
+                    <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem 
+                    Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der 
+                    Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht 
+                    ohne Ihre Einwilligung weiter.</p>
+                    
+                    <h3>4. Cookies</h3>
+                    <p>Unsere Website verwendet Cookies. Das sind kleine Textdateien, die Ihr Webbrowser auf Ihrem 
+                    Endgerät speichert. Cookies helfen uns dabei, unser Angebot nutzerfreundlicher zu machen.</p>
+                    <p>Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden 
+                    und Cookies nur im Einzelfall erlauben.</p>
+                    
+                    <h3>5. Ihre Rechte</h3>
+                    <ul>
+                        <li>Recht auf Auskunft über Ihre gespeicherten Daten</li>
+                        <li>Recht auf Berichtigung unrichtiger Daten</li>
+                        <li>Recht auf Löschung Ihrer Daten</li>
+                        <li>Recht auf Einschränkung der Datenverarbeitung</li>
+                        <li>Recht auf Datenübertragbarkeit</li>
+                        <li>Widerspruchsrecht gegen die Datenverarbeitung</li>
+                        <li>Beschwerderecht bei der Aufsichtsbehörde</li>
+                    </ul>
+                    
+                    <p><strong>Kontakt für Datenschutzfragen:</strong><br>
+                    E-Mail: info@kristallrein-kassel.de<br>
+                    Telefon: +49 1515 1816181</p>
+                `;
+            } else if (type === 'agb') {
+                html = `
+                    <h2>Allgemeine Geschäftsbedingungen (AGB)</h2>
+                    
+                    <h3>1. Geltungsbereich</h3>
+                    <p>Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge über Reinigungsdienstleistungen 
+                    zwischen KristallRein Kassel und dem Auftraggeber.</p>
+                    
+                    <h3>2. Vertragsschluss</h3>
+                    <p>Der Vertrag kommt durch schriftliche Auftragsbestätigung oder durch Beginn der Leistungserbringung 
+                    zustande. Mündliche Nebenabreden bedürfen der schriftlichen Bestätigung.</p>
+                    
+                    <h3>3. Leistungsumfang</h3>
+                    <p>Der Umfang der zu erbringenden Leistungen ergibt sich aus der schriftlichen Auftragsbestätigung 
+                    bzw. dem Leistungsverzeichnis. Änderungen oder Ergänzungen bedürfen der schriftlichen Vereinbarung.</p>
+                    
+                    <h3>4. Preise und Zahlungsbedingungen</h3>
+                    <ul>
+                        <li>Alle Preise verstehen sich in Euro zzgl. der gesetzlichen Mehrwertsteuer</li>
+                        <li>Die Abrechnung erfolgt nach Aufwand oder pauschal gemäß Vereinbarung</li>
+                        <li>Rechnungen sind innerhalb von 14 Tagen nach Rechnungsdatum ohne Abzug zu bezahlen</li>
+                        <li>Bei Zahlungsverzug werden Verzugszinsen in Höhe von 9% über dem Basiszinssatz berechnet</li>
+                    </ul>
+                    
+                    <h3>5. Pflichten des Auftraggebers</h3>
+                    <ul>
+                        <li>Zugang zu den zu reinigenden Räumlichkeiten muss gewährleistet sein</li>
+                        <li>Strom- und Wasseranschlüsse sind kostenfrei zur Verfügung zu stellen</li>
+                        <li>Wertgegenstände sind vom Auftraggeber zu sichern</li>
+                        <li>Besondere Gefahren oder Schäden sind uns unverzüglich mitzuteilen</li>
+                    </ul>
+                    
+                    <h3>6. Haftung</h3>
+                    <p>Wir haften für Schäden, die durch uns oder unsere Mitarbeiter vorsätzlich oder grob fahrlässig 
+                    verursacht werden. Die Haftung für leichte Fahrlässigkeit ist ausgeschlossen, soweit nicht Leben, 
+                    Körper oder Gesundheit betroffen sind.</p>
+                    
+                    <h3>7. Gewährleistung</h3>
+                    <p>Mängel sind uns unverzüglich schriftlich anzuzeigen. Wir verpflichten uns zur Nachbesserung 
+                    innerhalb angemessener Frist. Bei berechtigten Mängelrügen erfolgt die Nachbesserung kostenfrei.</p>
+                    
+                    <h3>8. Kündigung</h3>
+                    <ul>
+                        <li>Einzelaufträge können bis 48 Stunden vor Leistungsbeginn kostenfrei storniert werden</li>
+                        <li>Daueraufträge können mit einer Frist von 4 Wochen zum Monatsende gekündigt werden</li>
+                        <li>Die Kündigung bedarf der Schriftform</li>
+                    </ul>
+                    
+                    <h3>9. Datenschutz</h3>
+                    <p>Wir verpflichten uns zur Einhaltung der datenschutzrechtlichen Bestimmungen. Personenbezogene 
+                    Daten werden nur im Rahmen der Auftragsabwicklung verwendet und nicht an Dritte weitergegeben.</p>
+                    
+                    <h3>10. Schlussbestimmungen</h3>
+                    <p>Es gilt das Recht der Bundesrepublik Deutschland. Gerichtsstand ist bei Verträgen mit Kaufleuten 
+                    unser Geschäftssitz.</p>
+                    
+                    <p><strong>KristallRein Kassel</strong><br>
+                    Kasseler Straße 9<br>
+                    34314 Espenau<br>
+                    Stand: Januar 2025</p>
+                `;
+            }
+            
+            content.innerHTML = html;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLegalModal() {
+            const modal = document.getElementById('legalModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Modal beim Klick außerhalb schließen
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('legalModal');
+            if (e.target === modal) {
+                closeLegalModal();
+            }
+        });
+        
+        // Modal mit ESC-Taste schließen
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLegalModal();
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             // Back to Top Button
             const backToTopBtn = document.getElementById('backToTop');
@@ -2096,6 +2413,23 @@
                 localStorage.setItem('cookiesAccepted', 'true');
                 localStorage.setItem('cookiesDate', new Date().toISOString());
                 cookieBanner.classList.remove('active');
+                
+                // Erfolgsbenachrichtigung anzeigen
+                const notification = document.createElement('div');
+                notification.style.cssText = 'position: fixed; top: 20px; right: 20px; background: linear-gradient(135deg, #00b894 0%, #00a085 100%); color: white; padding: 20px 30px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 184, 148, 0.4); z-index: 10000; font-weight: 600; animation: slideInRight 0.5s ease;';
+                notification.innerHTML = '<i class="fas fa-check-circle" style="margin-right: 10px;"></i>Cookies akzeptiert! Vielen Dank.';
+                document.body.appendChild(notification);
+                
+                // Animation hinzufügen
+                const style = document.createElement('style');
+                style.textContent = '@keyframes slideInRight { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }';
+                document.head.appendChild(style);
+                
+                // Benachrichtigung nach 3 Sekunden ausblenden
+                setTimeout(() => {
+                    notification.style.animation = 'slideInRight 0.5s ease reverse';
+                    setTimeout(() => notification.remove(), 500);
+                }, 3000);
             });
             
             cookieSettingsBtn.addEventListener('click', function() {
