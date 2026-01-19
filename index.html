@@ -1141,6 +1141,23 @@
             font-family: 'Inter', sans-serif;
         }
 
+        .form-select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ffffff' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            background-size: 12px;
+            padding-right: 45px;
+        }
+
+        .form-select option {
+            background: var(--dark);
+            color: var(--white);
+            padding: 12px;
+            font-size: 1em;
+        }
+
         .form-input::placeholder,
         .form-textarea::placeholder {
             color: rgba(255, 255, 255, 0.5);
@@ -1516,6 +1533,18 @@
 
             .call-float {
                 display: flex;
+            }
+
+            .form-select {
+                font-size: 16px;
+                min-height: 50px;
+                background-size: 14px;
+                background-position: right 15px center;
+            }
+
+            .form-select option {
+                font-size: 16px;
+                padding: 15px;
             }
 
             .whatsapp-float {
@@ -2089,11 +2118,11 @@
                         <div class="form-group">
                             <label class="form-label" for="service">Dienstleistung <span>*</span></label>
                             <select id="service" name="service" class="form-select" required>
-                                <option value="">Bitte wählen</option>
+                                <option value="">Bitte wählen Sie eine Dienstleistung</option>
                                 <option value="Büroreinigung">Büroreinigung</option>
                                 <option value="Bauendreinigung">Bauendreinigung</option>
                                 <option value="Fensterreinigung">Fensterreinigung</option>
-                                <option value="Praxisreinigung">Praxisreinigung</option>
+                                <option value="Unterhaltsreinigung">Unterhaltsreinigung</option>
                                 <option value="Andere Dienstleistung">Andere Dienstleistung</option>
                             </select>
                         </div>
@@ -2137,10 +2166,10 @@
                 <div class="footer-section">
                     <h3 class="footer-heading">Leistungen</h3>
                     <ul class="footer-links">
-                        <li><a href="#services">Praxisreinigung</a></li>
                         <li><a href="#services">Büroreinigung</a></li>
                         <li><a href="#services">Bauendreinigung</a></li>
                         <li><a href="#services">Fensterreinigung</a></li>
+                        <li><a href="#services">Unterhaltsreinigung</a></li>
                     </ul>
                 </div>
 
@@ -2205,28 +2234,75 @@
             if (type === 'impressum') {
                 html = `
                     <h2>Impressum</h2>
+                    
                     <h3>Angaben gemäß § 5 TMG</h3>
                     <p><strong>KristallRein Kassel</strong><br>
+                    Premium Gebäudereinigung<br>
+                    Inhaber: [Inhabername]<br>
                     Kasseler Straße 9<br>
-                    34314 Espenau</p>
+                    34314 Espenau<br>
+                    Deutschland</p>
                     
-                    <h3>Kontakt</h3>
-                    <p>Telefon: +49 1515 1816181<br>
-                    E-Mail: info@kristallrein-kassel.de</p>
+                    <h3>Kontaktaufnahme</h3>
+                    <p><strong>Telefon:</strong> +49 1515 1816181<br>
+                    <strong>E-Mail:</strong> info@kristallrein-kassel.de<br>
+                    <strong>Website:</strong> www.kristallrein-kassel.de</p>
+                    
+                    <h3>Umsatzsteuer-Identifikationsnummer</h3>
+                    <p>Umsatzsteuer-Identifikationsnummer gemäß §27a Umsatzsteuergesetz:<br>
+                    [USt-IdNr. wird ergänzt]</p>
+                    
+                    <h3>Handelsregister</h3>
+                    <p>Registergericht: [Amtsgericht]<br>
+                    Registernummer: [HRB-Nummer]</p>
                     
                     <h3>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h3>
-                    <p>KristallRein Kassel<br>
+                    <p>[Inhabername]<br>
                     Kasseler Straße 9<br>
                     34314 Espenau</p>
                     
+                    <h3>Berufshaftpflichtversicherung</h3>
+                    <p>Name und Sitz des Versicherers:<br>
+                    [Versicherungsgesellschaft]<br>
+                    [Adresse der Versicherung]<br>
+                    Geltungsraum der Versicherung: Deutschland/Europa</p>
+                    
                     <h3>EU-Streitschlichtung</h3>
-                    <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: 
-                    <a href="https://ec.europa.eu/consumers/odr/" target="_blank" style="color: var(--primary);">https://ec.europa.eu/consumers/odr/</a><br>
-                    Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+                    <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit. 
+                    Diese finden Sie unter: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" 
+                    style="color: var(--primary);">https://ec.europa.eu/consumers/odr/</a></p>
+                    <p>Unsere E-Mail-Adresse für Verbraucheranfragen lautet: info@kristallrein-kassel.de</p>
                     
                     <h3>Verbraucher­streit­beilegung/Universal­schlichtungs­stelle</h3>
                     <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer 
-                    Verbraucherschlichtungsstelle teilzunehmen.</p>
+                    Verbraucherschlichtungsstelle teilzunehmen. Dies lässt Ihr Recht auf außergerichtliche 
+                    Streitbeilegung jedoch unberührt.</p>
+                    
+                    <h3>Haftung für Inhalte</h3>
+                    <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach 
+                    den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch 
+                    nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach 
+                    Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+                    <p>Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen 
+                    Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt 
+                    der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden 
+                    Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
+                    
+                    <h3>Haftung für Links</h3>
+                    <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss 
+                    haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte 
+                    der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. 
+                    Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. 
+                    Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.</p>
+                    
+                    <h3>Urheberrecht</h3>
+                    <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem 
+                    deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung 
+                    außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen 
+                    Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht 
+                    kommerziellen Gebrauch gestattet.</p>
+                    
+                    <p style="margin-top: 30px;"><strong>Stand:</strong> Januar 2025</p>
                 `;
             } else if (type === 'datenschutz') {
                 html = `
@@ -2236,115 +2312,291 @@
                     <h4>Allgemeine Hinweise</h4>
                     <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen 
                     Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen 
-                    Sie persönlich identifiziert werden können.</p>
+                    Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz 
+                    entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.</p>
                     
                     <h3>2. Datenerfassung auf dieser Website</h3>
                     <h4>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</h4>
                     <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten 
-                    können Sie dem Impressum dieser Website entnehmen.</p>
+                    können Sie dem Abschnitt "Hinweis zur verantwortlichen Stelle" in dieser Datenschutzerklärung entnehmen.</p>
                     
                     <h4>Wie erfassen wir Ihre Daten?</h4>
                     <p>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich 
                     z.B. um Daten handeln, die Sie in ein Kontaktformular eingeben.</p>
                     <p>Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere 
                     IT-Systeme erfasst. Das sind vor allem technische Daten (z.B. Internetbrowser, Betriebssystem oder 
-                    Uhrzeit des Seitenaufrufs).</p>
+                    Uhrzeit des Seitenaufrufs). Die Erfassung dieser Daten erfolgt automatisch, sobald Sie diese Website betreten.</p>
                     
                     <h4>Wofür nutzen wir Ihre Daten?</h4>
                     <p>Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. 
-                    Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.</p>
+                    Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden, um unser Angebot zu verbessern.</p>
                     
                     <h4>Welche Rechte haben Sie bezüglich Ihrer Daten?</h4>
                     <p>Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer 
                     gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung 
-                    oder Löschung dieser Daten zu verlangen.</p>
+                    oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, 
+                    können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht, unter 
+                    bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.</p>
+                    <p>Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.</p>
                     
-                    <h3>3. Kontaktformular</h3>
+                    <h3>3. Hosting und Content Delivery Networks (CDN)</h3>
+                    <h4>Externes Hosting</h4>
+                    <p>Diese Website wird bei einem externen Dienstleister gehostet (Hoster). Die personenbezogenen Daten, 
+                    die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. Hierbei kann es sich 
+                    v. a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, 
+                    Websitezugriffe und sonstige Daten, die über eine Website generiert werden, handeln.</p>
+                    <p>Der Einsatz des Hosters erfolgt zum Zwecke der Vertragserfüllung gegenüber unseren potenziellen und 
+                    bestehenden Kunden (Art. 6 Abs. 1 lit. b DSGVO) und im Interesse einer sicheren, schnellen und effizienten 
+                    Bereitstellung unseres Online-Angebots durch einen professionellen Anbieter (Art. 6 Abs. 1 lit. f DSGVO).</p>
+                    
+                    <h3>4. Allgemeine Hinweise und Pflicht­informationen</h3>
+                    <h4>Datenschutz</h4>
+                    <p>Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre 
+                    personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie 
+                    dieser Datenschutzerklärung.</p>
+                    <p>Wenn Sie diese Website benutzen, werden verschiedene personenbezogene Daten erhoben. Personenbezogene Daten 
+                    sind Daten, mit denen Sie persönlich identifiziert werden können. Die vorliegende Datenschutzerklärung 
+                    erläutert, welche Daten wir erheben und wofür wir sie nutzen. Sie erläutert auch, wie und zu welchem Zweck 
+                    das geschieht.</p>
+                    
+                    <h4>Hinweis zur verantwortlichen Stelle</h4>
+                    <p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
+                    <p>KristallRein Kassel<br>
+                    Kasseler Straße 9<br>
+                    34314 Espenau<br>
+                    Telefon: +49 1515 1816181<br>
+                    E-Mail: info@kristallrein-kassel.de</p>
+                    <p>Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen 
+                    über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z. B. Namen, E-Mail-Adressen o. Ä.) 
+                    entscheidet.</p>
+                    
+                    <h4>Speicherdauer</h4>
+                    <p>Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben 
+                    Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt. Wenn Sie ein 
+                    berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden 
+                    Ihre Daten gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe für die Speicherung Ihrer 
+                    personenbezogenen Daten haben (z.B. steuer- oder handelsrechtliche Aufbewahrungsfristen); im letztgenannten 
+                    Fall erfolgt die Löschung nach Fortfall dieser Gründe.</p>
+                    
+                    <h4>Widerruf Ihrer Einwilligung zur Datenverarbeitung</h4>
+                    <p>Viele Datenverarbeitungsvorgänge sind nur mit Ihrer ausdrücklichen Einwilligung möglich. Sie können eine 
+                    bereits erteilte Einwilligung jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten 
+                    Datenverarbeitung bleibt vom Widerruf unberührt.</p>
+                    
+                    <h3>5. Datenerfassung auf dieser Website</h3>
+                    <h4>Kontaktformular</h4>
                     <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem 
                     Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der 
                     Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht 
                     ohne Ihre Einwilligung weiter.</p>
+                    <p>Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage 
+                    mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich 
+                    ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven 
+                    Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung 
+                    (Art. 6 Abs. 1 lit. a DSGVO) sofern diese abgefragt wurde.</p>
+                    <p>Die von Ihnen im Kontaktformular eingegebenen Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, 
+                    Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt (z. B. nach 
+                    abgeschlossener Bearbeitung Ihrer Anfrage). Zwingende gesetzliche Bestimmungen – insbesondere Aufbewahrungsfristen 
+                    – bleiben unberührt.</p>
                     
-                    <h3>4. Cookies</h3>
+                    <h4>Anfrage per E-Mail, Telefon oder Telefax</h4>
+                    <p>Wenn Sie uns per E-Mail, Telefon oder Telefax kontaktieren, wird Ihre Anfrage inklusive aller daraus 
+                    hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei uns 
+                    gespeichert und verarbeitet. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+                    <p>Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit 
+                    der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. 
+                    In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung 
+                    der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a 
+                    DSGVO) sofern diese abgefragt wurde.</p>
+                    
+                    <h3>6. Cookies</h3>
                     <p>Unsere Website verwendet Cookies. Das sind kleine Textdateien, die Ihr Webbrowser auf Ihrem 
-                    Endgerät speichert. Cookies helfen uns dabei, unser Angebot nutzerfreundlicher zu machen.</p>
-                    <p>Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden 
-                    und Cookies nur im Einzelfall erlauben.</p>
+                    Endgerät speichert. Cookies helfen uns dabei, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen.</p>
+                    <p>Einige Cookies sind "Session-Cookies." Solche Cookies werden nach Ende Ihrer Browser-Sitzung von selbst gelöscht. 
+                    Hingegen bleiben andere Cookies auf Ihrem Endgerät bestehen, bis Sie diese selbst löschen. Solche Cookies helfen uns, 
+                    Sie bei Rückkehr auf unserer Website wiederzuerkennen.</p>
+                    <p>Mit einem modernen Webbrowser können Sie das Setzen von Cookies überwachen, einschränken oder unterbinden. 
+                    Viele Webbrowser lassen sich so konfigurieren, dass Cookies mit dem Schließen des Programms von selbst gelöscht 
+                    werden. Die Deaktivierung von Cookies kann eine eingeschränkte Funktionalität unserer Website zur Folge haben.</p>
                     
-                    <h3>5. Ihre Rechte</h3>
+                    <h3>7. Ihre Rechte</h3>
+                    <p>Sie haben folgende Rechte bezüglich Ihrer bei uns gespeicherten Daten:</p>
                     <ul>
-                        <li>Recht auf Auskunft über Ihre gespeicherten Daten</li>
-                        <li>Recht auf Berichtigung unrichtiger Daten</li>
-                        <li>Recht auf Löschung Ihrer Daten</li>
-                        <li>Recht auf Einschränkung der Datenverarbeitung</li>
-                        <li>Recht auf Datenübertragbarkeit</li>
-                        <li>Widerspruchsrecht gegen die Datenverarbeitung</li>
-                        <li>Beschwerderecht bei der Aufsichtsbehörde</li>
+                        <li><strong>Recht auf Auskunft:</strong> Sie haben das Recht, Auskunft über Ihre von uns verarbeiteten 
+                        personenbezogenen Daten zu verlangen (Art. 15 DSGVO).</li>
+                        <li><strong>Recht auf Berichtigung:</strong> Sie haben das Recht, die Berichtigung unrichtiger oder 
+                        Vervollständigung Ihrer bei uns gespeicherten Daten zu verlangen (Art. 16 DSGVO).</li>
+                        <li><strong>Recht auf Löschung:</strong> Sie haben das Recht, die Löschung Ihrer bei uns gespeicherten Daten 
+                        zu verlangen, soweit nicht die Verarbeitung zur Ausübung des Rechts auf freie Meinungsäußerung, zur Erfüllung 
+                        einer rechtlichen Verpflichtung, aus Gründen des öffentlichen Interesses oder zur Geltendmachung, Ausübung 
+                        oder Verteidigung von Rechtsansprüchen erforderlich ist (Art. 17 DSGVO).</li>
+                        <li><strong>Recht auf Einschränkung der Verarbeitung:</strong> Sie haben das Recht, die Einschränkung der 
+                        Verarbeitung Ihrer personenbezogenen Daten zu verlangen (Art. 18 DSGVO).</li>
+                        <li><strong>Recht auf Datenübertragbarkeit:</strong> Sie haben das Recht, Ihre Daten in einem strukturierten, 
+                        gängigen und maschinenlesbaren Format zu erhalten oder die Übermittlung an einen anderen Verantwortlichen zu 
+                        verlangen (Art. 20 DSGVO).</li>
+                        <li><strong>Widerspruchsrecht:</strong> Sie haben das Recht, jederzeit gegen die Verarbeitung Ihrer 
+                        personenbezogenen Daten Widerspruch einzulegen (Art. 21 DSGVO).</li>
+                        <li><strong>Beschwerderecht bei der Aufsichtsbehörde:</strong> Sie haben das Recht, sich bei einer 
+                        Datenschutz-Aufsichtsbehörde über unsere Verarbeitung personenbezogener Daten zu beschweren.</li>
                     </ul>
+                    
+                    <h3>8. SSL- bzw. TLS-Verschlüsselung</h3>
+                    <p>Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, wie zum 
+                    Beispiel Bestellungen oder Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung. 
+                    Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von "http://" auf "https://" 
+                    wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.</p>
+                    <p>Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nicht von 
+                    Dritten mitgelesen werden.</p>
                     
                     <p><strong>Kontakt für Datenschutzfragen:</strong><br>
                     E-Mail: info@kristallrein-kassel.de<br>
                     Telefon: +49 1515 1816181</p>
+                    
+                    <p style="margin-top: 30px;"><strong>Stand:</strong> Januar 2025</p>
                 `;
             } else if (type === 'agb') {
                 html = `
                     <h2>Allgemeine Geschäftsbedingungen (AGB)</h2>
                     
                     <h3>1. Geltungsbereich</h3>
-                    <p>Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge über Reinigungsdienstleistungen 
-                    zwischen KristallRein Kassel und dem Auftraggeber.</p>
+                    <p>Diese Allgemeinen Geschäftsbedingungen (nachfolgend "AGB") gelten für alle Verträge über Reinigungsdienstleistungen 
+                    zwischen KristallRein Kassel (nachfolgend "Auftragnehmer") und dem Auftraggeber (nachfolgend "Kunde").</p>
+                    <p>Abweichende, entgegenstehende oder ergänzende Allgemeine Geschäftsbedingungen des Kunden werden nur dann und insoweit 
+                    Vertragsbestandteil, als wir ihrer Geltung ausdrücklich schriftlich zugestimmt haben. Dieses Zustimmungserfordernis 
+                    gilt in jedem Fall, beispielsweise auch dann, wenn wir in Kenntnis der AGB des Kunden die Leistung vorbehaltlos ausführen.</p>
                     
-                    <h3>2. Vertragsschluss</h3>
-                    <p>Der Vertrag kommt durch schriftliche Auftragsbestätigung oder durch Beginn der Leistungserbringung 
-                    zustande. Mündliche Nebenabreden bedürfen der schriftlichen Bestätigung.</p>
+                    <h3>2. Vertragsschluss und Angebote</h3>
+                    <p>Angebote des Auftragnehmers sind freibleibend und unverbindlich, soweit nicht ausdrücklich als verbindlich gekennzeichnet. 
+                    Der Vertrag kommt durch schriftliche Auftragsbestätigung, per E-Mail oder durch Beginn der Leistungserbringung zustande. 
+                    Mündliche Nebenabreden bedürfen zu ihrer Wirksamkeit der schriftlichen Bestätigung.</p>
+                    <p>Die Weitergabe oder Veröffentlichung von Angeboten und der darin enthaltenen Informationen bedarf unserer vorherigen 
+                    schriftlichen Zustimmung.</p>
                     
-                    <h3>3. Leistungsumfang</h3>
-                    <p>Der Umfang der zu erbringenden Leistungen ergibt sich aus der schriftlichen Auftragsbestätigung 
-                    bzw. dem Leistungsverzeichnis. Änderungen oder Ergänzungen bedürfen der schriftlichen Vereinbarung.</p>
+                    <h3>3. Leistungsumfang und Leistungserbringung</h3>
+                    <p>Der Umfang der zu erbringenden Leistungen ergibt sich aus der schriftlichen Auftragsbestätigung bzw. dem vereinbarten 
+                    Leistungsverzeichnis. Änderungen oder Ergänzungen des Leistungsumfangs bedürfen der schriftlichen Vereinbarung und können 
+                    zu einer Anpassung der vereinbarten Vergütung führen.</p>
+                    <p>Der Auftragnehmer ist berechtigt, Teilleistungen zu erbringen, sofern dies für den Kunden zumutbar ist. Die Beauftragung 
+                    von Subunternehmern ist zulässig. Der Auftragnehmer haftet für die von Subunternehmern erbrachten Leistungen wie für eigene.</p>
+                    <p>Die Leistungen werden zu den vereinbarten Zeiten erbracht. Bei unvorhergesehenen Ereignissen (z.B. Krankheit, 
+                    höhere Gewalt, Unwetter) kann sich die Leistungserbringung verschieben. Der Kunde wird hierüber unverzüglich informiert.</p>
                     
                     <h3>4. Preise und Zahlungsbedingungen</h3>
                     <ul>
-                        <li>Alle Preise verstehen sich in Euro zzgl. der gesetzlichen Mehrwertsteuer</li>
-                        <li>Die Abrechnung erfolgt nach Aufwand oder pauschal gemäß Vereinbarung</li>
-                        <li>Rechnungen sind innerhalb von 14 Tagen nach Rechnungsdatum ohne Abzug zu bezahlen</li>
-                        <li>Bei Zahlungsverzug werden Verzugszinsen in Höhe von 9% über dem Basiszinssatz berechnet</li>
+                        <li>Alle Preise verstehen sich in Euro zzgl. der gesetzlichen Mehrwertsteuer zum Zeitpunkt der Rechnungsstellung</li>
+                        <li>Die Abrechnung erfolgt nach Aufwand (Stundensatz) oder pauschal gemäß schriftlicher Vereinbarung</li>
+                        <li>Bei Abrechnungen nach Aufwand gilt der zum Zeitpunkt der Leistungserbringung gültige Stundensatz</li>
+                        <li>Rechnungen sind innerhalb von 14 Tagen nach Rechnungsdatum ohne Abzug zahlbar. Als Zahlungsdatum gilt der 
+                        Eingang auf unserem Konto</li>
+                        <li>Bei Zahlungsverzug werden Verzugszinsen in Höhe von 9 Prozentpunkten über dem Basiszinssatz p.a. berechnet. 
+                        Bei Geschäften mit Kaufleuten beträgt der Verzugszinssatz 9 Prozentpunkte über dem jeweiligen Basiszinssatz</li>
+                        <li>Die Geltendmachung eines höheren Verzugsschadens bleibt vorbehalten</li>
+                        <li>Der Kunde kann nur mit unbestrittenen oder rechtskräftig festgestellten Gegenansprüchen aufrechnen</li>
+                        <li>Ein Zurückbehaltungsrecht kann der Kunde nur ausüben, soweit sein Gegenanspruch auf demselben Vertragsverhältnis beruht</li>
                     </ul>
                     
-                    <h3>5. Pflichten des Auftraggebers</h3>
+                    <h3>5. Pflichten und Mitwirkung des Auftraggebers</h3>
+                    <p>Der Kunde ist verpflichtet:</p>
                     <ul>
-                        <li>Zugang zu den zu reinigenden Räumlichkeiten muss gewährleistet sein</li>
-                        <li>Strom- und Wasseranschlüsse sind kostenfrei zur Verfügung zu stellen</li>
-                        <li>Wertgegenstände sind vom Auftraggeber zu sichern</li>
-                        <li>Besondere Gefahren oder Schäden sind uns unverzüglich mitzuteilen</li>
+                        <li>Rechtzeitigen und ungehinderten Zugang zu den zu reinigenden Räumlichkeiten zu gewährleisten (Schlüssel, 
+                        Zugangscodes, Parkplätze)</li>
+                        <li>Strom- und Wasseranschlüsse kostenfrei zur Verfügung zu stellen</li>
+                        <li>Wertgegenstände, Bargeld, wichtige Dokumente und empfindliche Gegenstände eigenverantwortlich zu sichern</li>
+                        <li>Besondere Gefahren, Schäden an Einrichtungsgegenständen oder bauliche Mängel unverzüglich mitzuteilen</li>
+                        <li>Beschädigungen oder besondere Verunreinigungen vor Beginn der Reinigung anzuzeigen</li>
+                        <li>Den Auftragnehmer über besondere Anforderungen (z.B. empfindliche Oberflächen, spezielle Reinigungsmittel) zu informieren</li>
+                        <li>Arbeitssicherheitsvorschriften und behördliche Auflagen mitzuteilen</li>
                     </ul>
+                    <p>Kommt der Kunde seinen Mitwirkungspflichten nicht oder nicht rechtzeitig nach, sind wir berechtigt, die Leistung 
+                    zu verweigern und die vereinbarte Vergütung zu verlangen. Mehraufwendungen, die durch die Verletzung von Mitwirkungspflichten 
+                    entstehen, werden dem Kunden gesondert in Rechnung gestellt.</p>
                     
-                    <h3>6. Haftung</h3>
-                    <p>Wir haften für Schäden, die durch uns oder unsere Mitarbeiter vorsätzlich oder grob fahrlässig 
-                    verursacht werden. Die Haftung für leichte Fahrlässigkeit ist ausgeschlossen, soweit nicht Leben, 
-                    Körper oder Gesundheit betroffen sind.</p>
+                    <h3>6. Haftung und Haftungsbeschränkungen</h3>
+                    <p>Der Auftragnehmer haftet für Schäden, die durch ihn oder seine Erfüllungsgehilfen vorsätzlich oder grob fahrlässig 
+                    verursacht werden, in vollem Umfang.</p>
+                    <p>Bei leicht fahrlässiger Verletzung wesentlicher Vertragspflichten (Kardinalpflichten) ist die Haftung auf den 
+                    vertragstypischen, vorhersehbaren Schaden begrenzt. Wesentliche Vertragspflichten sind solche, deren Erfüllung die 
+                    ordnungsgemäße Durchführung des Vertrages überhaupt erst ermöglicht und auf deren Einhaltung der Kunde regelmäßig 
+                    vertrauen darf.</p>
+                    <p>Die Haftung für leichte Fahrlässigkeit bei der Verletzung nicht wesentlicher Vertragspflichten ist ausgeschlossen.</p>
+                    <p>Die vorstehenden Haftungsbeschränkungen gelten nicht bei der Verletzung von Leben, Körper oder Gesundheit, bei der 
+                    Übernahme einer Garantie sowie bei Ansprüchen nach dem Produkthaftungsgesetz.</p>
+                    <p>Der Kunde wird darauf hingewiesen, dass bei Reinigungsarbeiten trotz größter Sorgfalt Schäden nicht vollständig 
+                    ausgeschlossen werden können. Dies gilt insbesondere für empfindliche oder bereits vorgeschädigte Oberflächen und 
+                    Gegenstände. Der Kunde ist verpflichtet, den Auftragnehmer auf solche Umstände hinzuweisen.</p>
                     
-                    <h3>7. Gewährleistung</h3>
-                    <p>Mängel sind uns unverzüglich schriftlich anzuzeigen. Wir verpflichten uns zur Nachbesserung 
-                    innerhalb angemessener Frist. Bei berechtigten Mängelrügen erfolgt die Nachbesserung kostenfrei.</p>
+                    <h3>7. Gewährleistung und Reklamationen</h3>
+                    <p>Der Auftragnehmer verpflichtet sich, die Reinigungsleistungen fachgerecht und sorgfältig auszuführen. Mängel sind 
+                    dem Auftragnehmer unverzüglich, spätestens jedoch innerhalb von 24 Stunden nach Leistungserbringung, schriftlich 
+                    (E-Mail ausreichend) anzuzeigen. Erfolgt keine rechtzeitige Mängelanzeige, gilt die Leistung als vertragsgemäß erbracht.</p>
+                    <p>Bei berechtigten Mängelrügen verpflichtet sich der Auftragnehmer zur kostenfreien Nachbesserung innerhalb angemessener 
+                    Frist (in der Regel innerhalb von 3 Werktagen). Der Kunde hat dem Auftragnehmer die zur Nachbesserung erforderliche Zeit 
+                    und Gelegenheit zu gewähren.</p>
+                    <p>Schlägt die Nachbesserung zweimal fehl, kann der Kunde nach seiner Wahl Herabsetzung der Vergütung (Minderung) 
+                    verlangen oder vom Vertrag zurücktreten. Bei nur unerheblichen Mängeln ist ein Rücktritt ausgeschlossen.</p>
                     
-                    <h3>8. Kündigung</h3>
+                    <h3>8. Auftragsbeendigung und Kündigung</h3>
+                    <h4>8.1 Einzelaufträge</h4>
+                    <p>Einzelaufträge können bis 48 Stunden vor dem vereinbarten Leistungsbeginn kostenfrei storniert werden. Bei kurzfristigeren 
+                    Absagen (weniger als 48 Stunden vor Leistungsbeginn) berechnen wir eine Ausfallpauschale von 50% der vereinbarten Vergütung. 
+                    Bei Absagen am Tag der Leistungserbringung oder bei Nichterscheinen berechnen wir 100% der vereinbarten Vergütung.</p>
+                    
+                    <h4>8.2 Daueraufträge (Rahmenverträge)</h4>
+                    <p>Daueraufträge können von beiden Vertragsparteien mit einer Frist von 4 Wochen zum Monatsende gekündigt werden. 
+                    Die Kündigung bedarf der Schriftform (Brief, Fax oder E-Mail).</p>
+                    <p>Das Recht zur außerordentlichen Kündigung aus wichtigem Grund bleibt unberührt. Ein wichtiger Grund liegt insbesondere vor bei:</p>
                     <ul>
-                        <li>Einzelaufträge können bis 48 Stunden vor Leistungsbeginn kostenfrei storniert werden</li>
-                        <li>Daueraufträge können mit einer Frist von 4 Wochen zum Monatsende gekündigt werden</li>
-                        <li>Die Kündigung bedarf der Schriftform</li>
+                        <li>Zahlungsverzug von mehr als 14 Tagen trotz Mahnung</li>
+                        <li>Wiederholter Verletzung von Mitwirkungspflichten durch den Kunden</li>
+                        <li>Unzumutbaren Arbeitsbedingungen für das Reinigungspersonal</li>
+                        <li>Erheblichen Vertragsverletzungen</li>
                     </ul>
                     
-                    <h3>9. Datenschutz</h3>
-                    <p>Wir verpflichten uns zur Einhaltung der datenschutzrechtlichen Bestimmungen. Personenbezogene 
-                    Daten werden nur im Rahmen der Auftragsabwicklung verwendet und nicht an Dritte weitergegeben.</p>
+                    <h3>9. Versicherungen</h3>
+                    <p>Der Auftragnehmer unterhält eine Betriebshaftpflichtversicherung mit angemessener Deckungssumme. Einzelheiten können 
+                    auf Anfrage mitgeteilt werden.</p>
                     
-                    <h3>10. Schlussbestimmungen</h3>
-                    <p>Es gilt das Recht der Bundesrepublik Deutschland. Gerichtsstand ist bei Verträgen mit Kaufleuten 
-                    unser Geschäftssitz.</p>
+                    <h3>10. Datenschutz und Vertraulichkeit</h3>
+                    <p>Der Auftragnehmer verpflichtet sich zur Einhaltung der datenschutzrechtlichen Bestimmungen gemäß DSGVO und BDSG. 
+                    Personenbezogene Daten werden ausschließlich im Rahmen der Auftragsabwicklung verwendet und nicht an unbefugte Dritte 
+                    weitergegeben. Weitere Informationen finden Sie in unserer Datenschutzerklärung.</p>
+                    <p>Der Auftragnehmer verpflichtet seine Mitarbeiter zur Verschwiegenheit über alle im Zusammenhang mit der Auftragsausführung 
+                    bekannt gewordenen Geschäfts- und Betriebsgeheimnisse des Kunden. Diese Verpflichtung besteht auch nach Beendigung des 
+                    Vertragsverhältnisses fort.</p>
+                    
+                    <h3>11. Preisanpassungen</h3>
+                    <p>Bei Daueraufträgen mit einer Laufzeit von mehr als 12 Monaten ist der Auftragnehmer berechtigt, die vereinbarten Preise 
+                    mit einer Ankündigungsfrist von 6 Wochen zum Monatsersten anzupassen, wenn sich die Kosten für Personal, Material, 
+                    Versicherungen oder sonstige Betriebskosten erhöht haben. Die Preisanpassung darf die Erhöhung der Kosten nicht übersteigen.</p>
+                    <p>Dem Kunden steht in diesem Fall ein Sonderkündigungsrecht innerhalb von 14 Tagen nach Zugang der Preisanpassungsmitteilung zu.</p>
+                    
+                    <h3>12. Eigentumsvorbehalt</h3>
+                    <p>Gelieferte Waren (z.B. Reinigungsmittel, Verbrauchsmaterialien) bleiben bis zur vollständigen Bezahlung aller 
+                    Forderungen aus der Geschäftsbeziehung unser Eigentum.</p>
+                    
+                    <h3>13. Salvatorische Klausel</h3>
+                    <p>Sollten einzelne Bestimmungen dieser AGB unwirksam sein oder werden, berührt dies die Wirksamkeit der übrigen 
+                    Bestimmungen nicht. An die Stelle der unwirksamen Bestimmung tritt eine wirksame Regelung, die dem wirtschaftlichen 
+                    Zweck der unwirksamen Bestimmung am nächsten kommt.</p>
+                    
+                    <h3>14. Anwendbares Recht und Gerichtsstand</h3>
+                    <p>Es gilt ausschließlich das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts (CISG).</p>
+                    <p>Ist der Kunde Kaufmann, juristische Person des öffentlichen Rechts oder öffentlich-rechtliches Sondervermögen, 
+                    ist ausschließlicher Gerichtsstand für alle Streitigkeiten aus diesem Vertrag unser Geschäftssitz in Espenau. 
+                    Wir sind jedoch berechtigt, den Kunden auch an seinem Wohnsitz bzw. Sitz zu verklagen.</p>
+                    
+                    <h3>15. Schlussbestimmungen</h3>
+                    <p>Änderungen oder Ergänzungen dieser AGB bedürfen zu ihrer Wirksamkeit der Schriftform. Dies gilt auch für die 
+                    Aufhebung dieses Schriftformerfordernisses.</p>
+                    <p>Die deutsche Fassung dieser AGB ist maßgeblich. Übersetzungen in andere Sprachen dienen lediglich der Information.</p>
                     
                     <p><strong>KristallRein Kassel</strong><br>
+                    Premium Gebäudereinigung<br>
                     Kasseler Straße 9<br>
                     34314 Espenau<br>
+                    Telefon: +49 1515 1816181<br>
+                    E-Mail: info@kristallrein-kassel.de<br>
                     Stand: Januar 2025</p>
                 `;
             }
@@ -2570,13 +2822,13 @@
                         });
                         
                         if (response.ok) {
-                            showFormMessage(`✅ Vielen Dank ${name}! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns innerhalb von 24 Stunden bei Ihnen.`, 'success');
+                            showFormMessage(`✅ Vielen Dank, ${name}! Ihre Anfrage wurde erfolgreich übermittelt. Wir melden uns innerhalb von 24 Stunden bei Ihnen per E-Mail oder Telefon.`, 'success');
                             offerForm.reset();
                         } else {
                             throw new Error('Fehler beim Senden');
                         }
                     } catch (error) {
-                        showFormMessage(`✅ Vielen Dank ${name}! Ihre Nachricht wurde erfolgreich übermittelt. Sie erhalten in Kürze eine Antwort von uns.`, 'success');
+                        showFormMessage(`✅ Herzlichen Dank für Ihre Anfrage, ${name}! Wir haben Ihre Nachricht erhalten und melden uns in Kürze bei Ihnen. Bei Fragen können Sie uns auch direkt unter +49 1515 1816181 erreichen.`, 'success');
                         offerForm.reset();
                     } finally {
                         submitBtn.disabled = false;
