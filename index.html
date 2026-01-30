@@ -7,6 +7,14 @@
     <title>KristallRein Kassel | Premium Gebäudereinigung & Unterhaltsreinigung</title>
     <meta name="description" content="Professionelle Gebäudereinigung in Kassel - Praxisreinigung, Büroreinigung, Bauendreinigung, Fensterreinigung. Jetzt kostenloses Angebot anfordern!">
     
+    <!-- SICHERHEITS-HEADERS - Schutz vor Hacking & XSS -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://formsubmit.co; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    
     <!-- SEO Meta Tags -->
     <meta name="keywords" content="Gebäudereinigung Kassel, Praxisreinigung, Büroreinigung, Bauendreinigung, Fensterreinigung, Reinigungsfirma Kassel">
     <meta name="author" content="KristallRein Kassel">
@@ -267,17 +275,21 @@
         .logo-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 1.5rem;
             box-shadow: 0 4px 15px rgba(0, 184, 148, 0.4);
             position: relative;
             overflow: hidden;
+            background: transparent;
+        }
+        
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
         }
 
         .logo-text {
@@ -781,10 +793,10 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
-            cursor: pointer;
             display: flex;
-            flex-direction: column;
-            min-height: 300px;
+            flex-direction: row;
+            min-height: 400px;
+            background: var(--white);
         }
 
         .gallery-comparison:hover {
@@ -792,34 +804,40 @@
             box-shadow: var(--shadow-lg);
         }
 
-        .gallery-before, .gallery-after {
-            width: 100%;
-            min-height: 150px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
+        .gallery-image-side {
+            width: 50%;
             position: relative;
             overflow: hidden;
-            padding: 30px 20px;
-            flex: 1;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 400px;
         }
-
+        
         .gallery-before {
-            background: linear-gradient(135deg, #666 0%, #333 100%);
+            background: linear-gradient(135deg, rgba(102, 102, 102, 0.3) 0%, rgba(51, 51, 51, 0.3) 100%);
+        }
+        
+        .gallery-after {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.3) 0%, rgba(26, 54, 93, 0.3) 100%);
         }
 
-        .gallery-after {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+        .gallery-text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+            width: 100%;
+            padding: 20px;
         }
 
         .gallery-badge {
-            position: relative;
-            z-index: 2;
+            display: inline-block;
             padding: 10px 25px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             color: white;
             border-radius: 50px;
             font-size: clamp(0.9rem, 3vw, 1rem);
@@ -830,7 +848,7 @@
         }
 
         .gallery-before .gallery-badge {
-            background: rgba(102, 102, 102, 0.9);
+            background: rgba(102, 102, 102, 0.95);
         }
 
         .gallery-after .gallery-badge {
@@ -840,17 +858,27 @@
         .gallery-icon {
             font-size: clamp(2rem, 6vw, 3rem);
             margin-bottom: 15px;
-            position: relative;
-            z-index: 2;
+            display: block;
         }
 
         .gallery-label {
-            position: relative;
-            z-index: 2;
             margin-top: 10px;
             font-size: clamp(1.1rem, 4vw, 1.3rem);
             font-weight: 700;
             text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-comparison {
+                flex-direction: column;
+                min-height: 500px;
+            }
+            
+            .gallery-image-side {
+                width: 100%;
+                min-height: 250px;
+            }
         }
 
         /* ===== SOCIAL MEDIA SECTION ===== */
@@ -1767,7 +1795,9 @@
     <header id="main-header">
         <div class="container header-container">
             <a href="#home" class="logo">
-                <div class="logo-icon">KR</div>
+                <div class="logo-icon">
+                    <img src="Logo1OhneHintergrund.png" alt="KristallRein Logo">
+                </div>
                 <div>
                     <div class="logo-text">Kristall<span>Rein</span></div>
                     <div class="logo-tagline">PREMIUM GEBÄUDEREINIGUNG</div>
@@ -1919,41 +1949,53 @@
 
             <div class="gallery-grid">
                 <div class="gallery-comparison">
-                    <div class="gallery-before">
-                        <div class="gallery-badge">VORHER</div>
-                        <div class="gallery-icon"><i class="fas fa-building"></i></div>
-                        <div class="gallery-label">Büro-Reinigung</div>
+                    <div class="gallery-image-side gallery-before" style="background-image: url('buero-vorher.jpg');">
+                        <div class="gallery-text-overlay">
+                            <div class="gallery-badge">VORHER</div>
+                            <div class="gallery-icon"><i class="fas fa-building"></i></div>
+                            <div class="gallery-label">Büro-Reinigung</div>
+                        </div>
                     </div>
-                    <div class="gallery-after">
-                        <div class="gallery-badge">NACHHER</div>
-                        <div class="gallery-icon"><i class="fas fa-building"></i></div>
-                        <div class="gallery-label">Büro-Reinigung</div>
-                    </div>
-                </div>
-
-                <div class="gallery-comparison">
-                    <div class="gallery-before">
-                        <div class="gallery-badge">VORHER</div>
-                        <div class="gallery-icon"><i class="fas fa-tools"></i></div>
-                        <div class="gallery-label">Bauendreinigung</div>
-                    </div>
-                    <div class="gallery-after">
-                        <div class="gallery-badge">NACHHER</div>
-                        <div class="gallery-icon"><i class="fas fa-tools"></i></div>
-                        <div class="gallery-label">Bauendreinigung</div>
+                    <div class="gallery-image-side gallery-after" style="background-image: url('buero-nachher.jpg');">
+                        <div class="gallery-text-overlay">
+                            <div class="gallery-badge">NACHHER</div>
+                            <div class="gallery-icon"><i class="fas fa-building"></i></div>
+                            <div class="gallery-label">Büro-Reinigung</div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="gallery-comparison">
-                    <div class="gallery-before">
-                        <div class="gallery-badge">VORHER</div>
-                        <div class="gallery-icon"><i class="fas fa-window-restore"></i></div>
-                        <div class="gallery-label">Fensterreinigung</div>
+                    <div class="gallery-image-side gallery-before" style="background: linear-gradient(135deg, #666 0%, #333 100%);">
+                        <div class="gallery-text-overlay">
+                            <div class="gallery-badge">VORHER</div>
+                            <div class="gallery-icon"><i class="fas fa-tools"></i></div>
+                            <div class="gallery-label">Bauendreinigung</div>
+                        </div>
                     </div>
-                    <div class="gallery-after">
-                        <div class="gallery-badge">NACHHER</div>
-                        <div class="gallery-icon"><i class="fas fa-window-restore"></i></div>
-                        <div class="gallery-label">Fensterreinigung</div>
+                    <div class="gallery-image-side gallery-after" style="background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);">
+                        <div class="gallery-text-overlay">
+                            <div class="gallery-badge">NACHHER</div>
+                            <div class="gallery-icon"><i class="fas fa-tools"></i></div>
+                            <div class="gallery-label">Bauendreinigung</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-comparison">
+                    <div class="gallery-image-side gallery-before" style="background: linear-gradient(135deg, #666 0%, #333 100%);">
+                        <div class="gallery-text-overlay">
+                            <div class="gallery-badge">VORHER</div>
+                            <div class="gallery-icon"><i class="fas fa-window-restore"></i></div>
+                            <div class="gallery-label">Fensterreinigung</div>
+                        </div>
+                    </div>
+                    <div class="gallery-image-side gallery-after" style="background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);">
+                        <div class="gallery-text-overlay">
+                            <div class="gallery-badge">NACHHER</div>
+                            <div class="gallery-icon"><i class="fas fa-window-restore"></i></div>
+                            <div class="gallery-label">Fensterreinigung</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2850,13 +2892,13 @@
                         });
                         
                         if (response.ok) {
-                            showFormMessage(`✅ Vielen Dank, ${name}! Ihre Anfrage wurde erfolgreich übermittelt. Wir melden uns innerhalb von 24 Stunden bei Ihnen per E-Mail oder Telefon.`, 'success');
+                            showToastNotification(`✨ Perfekt, ${name}! Ihre Anfrage ist bei uns eingegangen. Wir melden uns innerhalb von 24 Stunden bei Ihnen!`, 'success');
                             offerForm.reset();
                         } else {
                             throw new Error('Fehler beim Senden');
                         }
                     } catch (error) {
-                        showFormMessage(`✅ Herzlichen Dank für Ihre Anfrage, ${name}! Wir haben Ihre Nachricht erhalten und melden uns in Kürze bei Ihnen. Bei Fragen können Sie uns auch direkt unter +49 1515 1816181 erreichen.`, 'success');
+                        showToastNotification(`✨ Herzlichen Dank, ${name}! Ihre Anfrage wurde erfolgreich übermittelt. Wir kontaktieren Sie in Kürze!`, 'success');
                         offerForm.reset();
                     } finally {
                         submitBtn.disabled = false;
@@ -2878,6 +2920,51 @@
                     formMessages.innerHTML = '';
                     formMessages.style.display = 'none';
                 }, 10000);
+            }
+            
+            // Toast Notification Function - Oben rechts
+            function showToastNotification(message, type) {
+                const toast = document.createElement('div');
+                toast.style.cssText = `
+                    position: fixed;
+                    top: 100px;
+                    right: -400px;
+                    background: ${type === 'success' ? 'linear-gradient(135deg, #00b894 0%, #00a085 100%)' : 'linear-gradient(135deg, #dc3545 0%, #c82333 100%)'};
+                    color: white;
+                    padding: 20px 30px;
+                    border-radius: 12px;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                    z-index: 10001;
+                    font-weight: 600;
+                    font-size: 1rem;
+                    max-width: 400px;
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                `;
+                
+                const icon = document.createElement('i');
+                icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+                icon.style.fontSize = '1.5rem';
+                
+                const text = document.createElement('span');
+                text.textContent = message;
+                
+                toast.appendChild(icon);
+                toast.appendChild(text);
+                document.body.appendChild(toast);
+                
+                // Slide in
+                setTimeout(() => {
+                    toast.style.right = '20px';
+                }, 100);
+                
+                // Slide out after 5 seconds
+                setTimeout(() => {
+                    toast.style.right = '-400px';
+                    setTimeout(() => toast.remove(), 500);
+                }, 5000);
             }
 
             // Animation on Scroll
