@@ -273,43 +273,84 @@
         }
 
         .logo-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 184, 148, 0.4);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+            box-shadow: 0 8px 24px rgba(0, 184, 148, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
-            background: transparent;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+        
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .logo:hover .logo-icon {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 12px 32px rgba(0, 184, 148, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
         
         .logo-icon img {
-            width: 100%;
-            height: 100%;
+            width: 85%;
+            height: 85%;
             object-fit: contain;
-            border-radius: 12px;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+            position: relative;
+            z-index: 1;
         }
 
         .logo-text {
             font-size: clamp(1.5rem, 4vw, 1.8rem);
-            font-weight: 800;
-            color: var(--white);
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
 
         .logo-text span {
-            color: var(--accent);
-            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent) 0%, #00e6b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            filter: drop-shadow(0 0 10px rgba(0, 184, 148, 0.5));
         }
 
         .logo-tagline {
-            font-size: clamp(0.6rem, 2vw, 0.7rem);
-            color: var(--accent);
-            font-weight: 500;
+            font-size: clamp(0.65rem, 2vw, 0.75rem);
+            background: linear-gradient(90deg, var(--accent) 0%, #00e6b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
             margin-top: -2px;
-            letter-spacing: 0.5px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            filter: drop-shadow(0 0 8px rgba(0, 184, 148, 0.3));
         }
 
         nav ul {
@@ -783,8 +824,8 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+            gap: 40px;
             margin-top: 50px;
         }
 
@@ -793,15 +834,57 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
-            display: flex;
-            flex-direction: row;
-            min-height: 400px;
             background: var(--white);
+            cursor: pointer;
+            position: relative;
         }
 
         .gallery-comparison:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-comparison::before {
+            content: '🔍 Klicken zum Vergrößern';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 10;
+            opacity: 0;
+            transition: var(--transition);
+            pointer-events: none;
+        }
+        
+        .gallery-comparison:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-title {
+            text-align: center;
+            padding: 15px;
+            background: var(--white);
+            font-weight: 700;
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            color: var(--dark);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .gallery-title i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .gallery-images {
+            display: flex;
+            position: relative;
+            min-height: 400px;
         }
 
         .gallery-image-side {
@@ -815,62 +898,35 @@
         }
         
         .gallery-before {
-            background: linear-gradient(135deg, rgba(102, 102, 102, 0.3) 0%, rgba(51, 51, 51, 0.3) 100%);
-        }
-        
-        .gallery-after {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.3) 0%, rgba(26, 54, 93, 0.3) 100%);
-        }
-
-        .gallery-text-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            z-index: 2;
-            width: 100%;
-            padding: 20px;
+            border-right: 3px solid var(--white);
         }
 
         .gallery-badge {
-            display: inline-block;
-            padding: 10px 25px;
-            background: rgba(0, 0, 0, 0.9);
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 20px;
             color: white;
             border-radius: 50px;
-            font-size: clamp(0.9rem, 3vw, 1rem);
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
             font-weight: 700;
-            letter-spacing: 0.5px;
-            margin-bottom: 15px;
-            text-align: center;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .gallery-before .gallery-badge {
-            background: rgba(102, 102, 102, 0.95);
+            background: linear-gradient(135deg, #999 0%, #666 100%);
         }
 
         .gallery-after .gallery-badge {
-            background: rgba(0, 102, 204, 0.95);
-        }
-
-        .gallery-icon {
-            font-size: clamp(2rem, 6vw, 3rem);
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .gallery-label {
-            margin-top: 10px;
-            font-size: clamp(1.1rem, 4vw, 1.3rem);
-            font-weight: 700;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
         }
         
         @media (max-width: 768px) {
-            .gallery-comparison {
+            .gallery-images {
                 flex-direction: column;
                 min-height: 500px;
             }
@@ -879,6 +935,72 @@
                 width: 100%;
                 min-height: 250px;
             }
+            
+            .gallery-before {
+                border-right: none;
+                border-bottom: 3px solid var(--white);
+            }
+        }
+        
+        /* Modal für vergrößerte Ansicht */
+        .gallery-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .gallery-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery-modal-content {
+            max-width: 95%;
+            max-height: 90%;
+            position: relative;
+            animation: zoomIn 0.3s ease;
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .gallery-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+            z-index: 10001;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .gallery-modal-close:hover {
+            background: var(--accent);
+            transform: rotate(90deg);
+        }
+        
+        .gallery-modal img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
         /* ===== SOCIAL MEDIA SECTION ===== */
@@ -1948,53 +2070,47 @@
             </div>
 
             <div class="gallery-grid">
-                <div class="gallery-comparison">
-                    <div class="gallery-image-side gallery-before" style="background-image: url('buero-vorher.jpg');">
-                        <div class="gallery-text-overlay">
-                            <div class="gallery-badge">VORHER</div>
-                            <div class="gallery-icon"><i class="fas fa-building"></i></div>
-                            <div class="gallery-label">Büro-Reinigung</div>
-                        </div>
+                <div class="gallery-comparison" onclick="openGalleryModal('buero')">
+                    <div class="gallery-title">
+                        <i class="fas fa-building"></i>
+                        Büro-Reinigung
                     </div>
-                    <div class="gallery-image-side gallery-after" style="background-image: url('buero-nachher.jpg');">
-                        <div class="gallery-text-overlay">
+                    <div class="gallery-images">
+                        <div class="gallery-image-side gallery-before" style="background-image: url('buero-vorher.jpg');">
+                            <div class="gallery-badge">VORHER</div>
+                        </div>
+                        <div class="gallery-image-side gallery-after" style="background-image: url('buero-nachher.jpg');">
                             <div class="gallery-badge">NACHHER</div>
-                            <div class="gallery-icon"><i class="fas fa-building"></i></div>
-                            <div class="gallery-label">Büro-Reinigung</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="gallery-comparison">
-                    <div class="gallery-image-side gallery-before" style="background: linear-gradient(135deg, #666 0%, #333 100%);">
-                        <div class="gallery-text-overlay">
-                            <div class="gallery-badge">VORHER</div>
-                            <div class="gallery-icon"><i class="fas fa-tools"></i></div>
-                            <div class="gallery-label">Bauendreinigung</div>
-                        </div>
+                <div class="gallery-comparison" onclick="openGalleryModal('bau')">
+                    <div class="gallery-title">
+                        <i class="fas fa-tools"></i>
+                        Bauendreinigung
                     </div>
-                    <div class="gallery-image-side gallery-after" style="background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);">
-                        <div class="gallery-text-overlay">
+                    <div class="gallery-images">
+                        <div class="gallery-image-side gallery-before" style="background: linear-gradient(135deg, rgba(102, 102, 102, 0.8) 0%, rgba(51, 51, 51, 0.8) 100%), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800'); background-size: cover; background-position: center;">
+                            <div class="gallery-badge">VORHER</div>
+                        </div>
+                        <div class="gallery-image-side gallery-after" style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.3) 0%, rgba(26, 54, 93, 0.3) 100%), url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800'); background-size: cover; background-position: center;">
                             <div class="gallery-badge">NACHHER</div>
-                            <div class="gallery-icon"><i class="fas fa-tools"></i></div>
-                            <div class="gallery-label">Bauendreinigung</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="gallery-comparison">
-                    <div class="gallery-image-side gallery-before" style="background: linear-gradient(135deg, #666 0%, #333 100%);">
-                        <div class="gallery-text-overlay">
-                            <div class="gallery-badge">VORHER</div>
-                            <div class="gallery-icon"><i class="fas fa-window-restore"></i></div>
-                            <div class="gallery-label">Fensterreinigung</div>
-                        </div>
+                <div class="gallery-comparison" onclick="openGalleryModal('fenster')">
+                    <div class="gallery-title">
+                        <i class="fas fa-window-restore"></i>
+                        Fensterreinigung
                     </div>
-                    <div class="gallery-image-side gallery-after" style="background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);">
-                        <div class="gallery-text-overlay">
+                    <div class="gallery-images">
+                        <div class="gallery-image-side gallery-before" style="background: linear-gradient(135deg, rgba(102, 102, 102, 0.7) 0%, rgba(51, 51, 51, 0.7) 100%), url('https://images.unsplash.com/photo-1600607686527-6fb886090705?w=800'); background-size: cover; background-position: center;">
+                            <div class="gallery-badge">VORHER</div>
+                        </div>
+                        <div class="gallery-image-side gallery-after" style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.2) 0%, rgba(26, 54, 93, 0.2) 100%), url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800'); background-size: cover; background-position: center;">
                             <div class="gallery-badge">NACHHER</div>
-                            <div class="gallery-icon"><i class="fas fa-window-restore"></i></div>
-                            <div class="gallery-label">Fensterreinigung</div>
                         </div>
                     </div>
                 </div>
@@ -2291,9 +2407,86 @@
             <div id="legalContent"></div>
         </div>
     </div>
+    
+    <!-- ===== GALLERY MODAL ===== -->
+    <div class="gallery-modal" id="galleryModal">
+        <button class="gallery-modal-close" onclick="closeGalleryModal()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="gallery-modal-content" id="galleryModalContent">
+        </div>
+    </div>
 
     <!-- ===== JAVASCRIPT ===== -->
     <script>
+        // Gallery Modal Functions
+        function openGalleryModal(type) {
+            const modal = document.getElementById('galleryModal');
+            const content = document.getElementById('galleryModalContent');
+            
+            let imageHTML = '';
+            
+            if (type === 'buero') {
+                imageHTML = `
+                    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 1400px;">
+                        <h2 style="color: white; text-align: center; font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 20px;">
+                            <i class="fas fa-building"></i> Büro-Reinigung: Vorher & Nachher
+                        </h2>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div style="text-align: center;">
+                                <div style="background: rgba(153, 153, 153, 0.9); color: white; padding: 10px; border-radius: 10px 10px 0 0; font-weight: 700; letter-spacing: 1px;">VORHER</div>
+                                <img src="buero-vorher.jpg" alt="Büro Vorher" style="width: 100%; border-radius: 0 0 10px 10px;">
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="background: linear-gradient(135deg, #00b894 0%, #00a085 100%); color: white; padding: 10px; border-radius: 10px 10px 0 0; font-weight: 700; letter-spacing: 1px;">NACHHER</div>
+                                <img src="buero-nachher.jpg" alt="Büro Nachher" style="width: 100%; border-radius: 0 0 10px 10px;">
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'bau') {
+                imageHTML = `
+                    <div style="text-align: center; max-width: 1200px;">
+                        <h2 style="color: white; margin-bottom: 30px; font-size: clamp(1.5rem, 3vw, 2rem);">
+                            <i class="fas fa-tools"></i> Bauendreinigung Beispiel
+                        </h2>
+                        <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; margin-bottom: 20px;">
+                            Professionelle Bauendreinigung - Vom Baustaub zur Perfektion
+                        </p>
+                    </div>
+                `;
+            } else if (type === 'fenster') {
+                imageHTML = `
+                    <div style="text-align: center; max-width: 1200px;">
+                        <h2 style="color: white; margin-bottom: 30px; font-size: clamp(1.5rem, 3vw, 2rem);">
+                            <i class="fas fa-window-restore"></i> Fensterreinigung Beispiel
+                        </h2>
+                        <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; margin-bottom: 20px;">
+                            Streifenfreie Fenster für kristallklare Durchsicht
+                        </p>
+                    </div>
+                `;
+            }
+            
+            content.innerHTML = imageHTML;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeGalleryModal() {
+            const modal = document.getElementById('galleryModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Modal beim Klick außerhalb schließen
+        document.addEventListener('click', function(e) {
+            const galleryModal = document.getElementById('galleryModal');
+            if (e.target === galleryModal) {
+                closeGalleryModal();
+            }
+        });
+        
         // Legal Modal Functions
         function showLegalModal(type) {
             const modal = document.getElementById('legalModal');
@@ -2694,6 +2887,7 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeLegalModal();
+                closeGalleryModal();
             }
         });
 
