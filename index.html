@@ -26,7 +26,7 @@
     <meta property="og:url" content="https://kristallrein-kassel.de">
     <meta property="og:title" content="KristallRein Kassel | Premium Gebäudereinigung">
     <meta property="og:description" content="Professionelle Gebäudereinigung in Kassel - Praxisreinigung, Büroreinigung, Bauendreinigung. Jetzt kostenloses Angebot anfordern!">
-    <meta property="og:image" content="https://kristallrein-kassel.de/Logo1OhneHintergrund.png">
+    <meta property="og:image" content="https://kristallrein-kassel.de/Logomit#152D51.png">
     <meta property="og:locale" content="de_DE">
     
     <!-- Twitter -->
@@ -34,11 +34,11 @@
     <meta name="twitter:url" content="https://kristallrein-kassel.de">
     <meta name="twitter:title" content="KristallRein Kassel | Premium Gebäudereinigung">
     <meta name="twitter:description" content="Professionelle Gebäudereinigung in Kassel - Praxisreinigung, Büroreinigung, Bauendreinigung.">
-    <meta name="twitter:image" content="https://kristallrein-kassel.de/Logo1OhneHintergrund.png">
+    <meta name="twitter:image" content="https://kristallrein-kassel.de/Logomit#152D51.png">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/Logo1OhneHintergrund.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/Logo1OhneHintergrund.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/Logomit#152D51.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/Logomit#152D51.png">
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -46,7 +46,7 @@
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "KristallRein Kassel",
-      "image": "https://kristallrein-kassel.de/Logo1OhneHintergrund.png",
+      "image": "https://kristallrein-kassel.de/Logomit#152D51.png",
       "@id": "https://kristallrein-kassel.de",
       "url": "https://kristallrein-kassel.de",
       "telephone": "+4915151816181",
@@ -828,13 +828,6 @@
             gap: 40px;
             margin-top: 50px;
         }
-        
-        @media (max-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-        }
 
         .gallery-comparison {
             border-radius: var(--border-radius);
@@ -907,16 +900,6 @@
         .gallery-before {
             border-right: 3px solid var(--white);
         }
-        
-        /* Desktop: Voller Bildinhalt sichtbar */
-        @media (min-width: 769px) {
-            .gallery-images {
-                min-height: 450px;
-            }
-            .gallery-image-side {
-                min-height: 450px;
-            }
-        }
 
         .gallery-badge {
             position: absolute;
@@ -943,34 +926,23 @@
         }
         
         @media (max-width: 768px) {
-            .gallery-comparison {
-                margin: 0;
-            }
-            
             .gallery-images {
                 flex-direction: column;
-                min-height: auto;
+                min-height: 500px;
             }
             
             .gallery-image-side {
                 width: 100%;
-                min-height: 300px;
-                background-size: cover;
+                min-height: 250px;
             }
             
             .gallery-before {
                 border-right: none;
                 border-bottom: 3px solid var(--white);
             }
-            
-            .gallery-badge {
-                top: 15px;
-                font-size: 0.8rem;
-                padding: 6px 16px;
-            }
         }
         
-        /* Modal für vergrößerte Ansicht mit Zoom */
+        /* Modal für vergrößerte Ansicht */
         .gallery-modal {
             display: none;
             position: fixed;
@@ -981,8 +953,6 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.95);
             animation: fadeIn 0.3s ease;
-            overflow: auto;
-            padding: 20px;
         }
         
         .gallery-modal.active {
@@ -992,11 +962,10 @@
         }
         
         .gallery-modal-content {
-            width: 100%;
-            max-width: 1400px;
+            max-width: 95%;
+            max-height: 90%;
             position: relative;
             animation: zoomIn 0.3s ease;
-            margin: auto;
         }
         
         @keyframes zoomIn {
@@ -1005,49 +974,26 @@
         }
         
         .gallery-modal-close {
-            position: fixed;
+            position: absolute;
             top: 20px;
             right: 20px;
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: white;
             cursor: pointer;
-            z-index: 10002;
+            z-index: 10001;
             width: 60px;
             height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 50%;
             transition: var(--transition);
-            border: 2px solid rgba(255, 255, 255, 0.3);
         }
         
         .gallery-modal-close:hover {
             background: var(--accent);
             transform: rotate(90deg);
-            border-color: var(--accent);
-        }
-        
-        .gallery-modal-image-container {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-        }
-        
-        .gallery-modal-image-wrapper {
-            position: relative;
-            cursor: zoom-in;
-            transition: var(--transition);
-            max-width: 100%;
-            overflow: hidden;
-            border-radius: var(--border-radius);
-        }
-        
-        .gallery-modal-image-wrapper.zoomed {
-            cursor: zoom-out;
         }
         
         .gallery-modal img {
@@ -1055,58 +1001,6 @@
             height: auto;
             border-radius: var(--border-radius);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease;
-            display: block;
-        }
-        
-        .gallery-modal-image-wrapper.zoomed img {
-            transform: scale(1.5);
-            cursor: move;
-        }
-        
-        .zoom-hint {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            z-index: 10001;
-            pointer-events: none;
-            animation: fadeInOut 3s ease-in-out infinite;
-        }
-        
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-        
-        @media (max-width: 768px) {
-            .gallery-modal {
-                padding: 10px;
-            }
-            
-            .gallery-modal-close {
-                width: 50px;
-                height: 50px;
-                font-size: 2rem;
-                top: 10px;
-                right: 10px;
-            }
-            
-            .gallery-modal-content {
-                max-width: 100%;
-            }
-            
-            .zoom-hint {
-                font-size: 0.8rem;
-                padding: 8px 16px;
-                bottom: 10px;
-            }
         }
 
         /* ===== SOCIAL MEDIA SECTION ===== */
@@ -2024,7 +1918,7 @@
         <div class="container header-container">
             <a href="#home" class="logo">
                 <div class="logo-icon">
-                    <img src="Logo1OhneHintergrund.png?v=2" alt="KristallRein Logo" id="logo-image">
+                    <img src="Logomit#152D51.png" alt="KristallRein Logo">
                 </div>
                 <div>
                     <div class="logo-text">Kristall<span>Rein</span></div>
@@ -2525,7 +2419,7 @@
 
     <!-- ===== JAVASCRIPT ===== -->
     <script>
-        // Gallery Modal Functions mit Zoom
+        // Gallery Modal Functions
         function openGalleryModal(type) {
             const modal = document.getElementById('galleryModal');
             const content = document.getElementById('galleryModalContent');
@@ -2534,31 +2428,25 @@
             
             if (type === 'buero') {
                 imageHTML = `
-                    <div style="width: 100%; max-width: 1400px; margin: 0 auto;">
-                        <h2 style="color: white; text-align: center; font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 30px;">
+                    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 1400px;">
+                        <h2 style="color: white; text-align: center; font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 20px;">
                             <i class="fas fa-building"></i> Büro-Reinigung: Vorher & Nachher
                         </h2>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 20px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                             <div style="text-align: center;">
-                                <div style="background: linear-gradient(135deg, #999 0%, #666 100%); color: white; padding: 12px; border-radius: 10px 10px 0 0; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;">VORHER</div>
-                                <div class="gallery-modal-image-wrapper" onclick="toggleZoom(this)">
-                                    <img src="buero-vorher.jpg" alt="Büro Vorher" style="width: 100%; border-radius: 0 0 10px 10px; cursor: zoom-in;">
-                                    <div class="zoom-hint">🔍 Klick zum Zoomen</div>
-                                </div>
+                                <div style="background: rgba(153, 153, 153, 0.9); color: white; padding: 10px; border-radius: 10px 10px 0 0; font-weight: 700; letter-spacing: 1px;">VORHER</div>
+                                <img src="buero-vorher.jpg" alt="Büro Vorher" style="width: 100%; border-radius: 0 0 10px 10px;">
                             </div>
                             <div style="text-align: center;">
-                                <div style="background: linear-gradient(135deg, #00b894 0%, #00a085 100%); color: white; padding: 12px; border-radius: 10px 10px 0 0; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;">NACHHER</div>
-                                <div class="gallery-modal-image-wrapper" onclick="toggleZoom(this)">
-                                    <img src="buero-nachher.jpg" alt="Büro Nachher" style="width: 100%; border-radius: 0 0 10px 10px; cursor: zoom-in;">
-                                    <div class="zoom-hint">🔍 Klick zum Zoomen</div>
-                                </div>
+                                <div style="background: linear-gradient(135deg, #00b894 0%, #00a085 100%); color: white; padding: 10px; border-radius: 10px 10px 0 0; font-weight: 700; letter-spacing: 1px;">NACHHER</div>
+                                <img src="buero-nachher.jpg" alt="Büro Nachher" style="width: 100%; border-radius: 0 0 10px 10px;">
                             </div>
                         </div>
                     </div>
                 `;
             } else if (type === 'bau') {
                 imageHTML = `
-                    <div style="text-align: center; max-width: 1200px; margin: 0 auto;">
+                    <div style="text-align: center; max-width: 1200px;">
                         <h2 style="color: white; margin-bottom: 30px; font-size: clamp(1.5rem, 3vw, 2rem);">
                             <i class="fas fa-tools"></i> Bauendreinigung Beispiel
                         </h2>
@@ -2569,7 +2457,7 @@
                 `;
             } else if (type === 'fenster') {
                 imageHTML = `
-                    <div style="text-align: center; max-width: 1200px; margin: 0 auto;">
+                    <div style="text-align: center; max-width: 1200px;">
                         <h2 style="color: white; margin-bottom: 30px; font-size: clamp(1.5rem, 3vw, 2rem);">
                             <i class="fas fa-window-restore"></i> Fensterreinigung Beispiel
                         </h2>
@@ -2585,66 +2473,8 @@
             document.body.style.overflow = 'hidden';
         }
         
-        function toggleZoom(element) {
-            const isZoomed = element.classList.contains('zoomed');
-            
-            // Alle anderen gezoomten Bilder zurücksetzen
-            document.querySelectorAll('.gallery-modal-image-wrapper.zoomed').forEach(el => {
-                if (el !== element) {
-                    el.classList.remove('zoomed');
-                }
-            });
-            
-            if (isZoomed) {
-                element.classList.remove('zoomed');
-            } else {
-                element.classList.add('zoomed');
-                
-                // Mouse-move für Pan-Funktion beim Zoom
-                const img = element.querySelector('img');
-                let isMoving = false;
-                let startX, startY, scrollLeft, scrollTop;
-                
-                element.addEventListener('mousedown', function(e) {
-                    if (element.classList.contains('zoomed')) {
-                        isMoving = true;
-                        startX = e.pageX - element.offsetLeft;
-                        startY = e.pageY - element.offsetTop;
-                        scrollLeft = element.scrollLeft;
-                        scrollTop = element.scrollTop;
-                        element.style.cursor = 'grabbing';
-                    }
-                });
-                
-                element.addEventListener('mousemove', function(e) {
-                    if (!isMoving) return;
-                    e.preventDefault();
-                    const x = e.pageX - element.offsetLeft;
-                    const y = e.pageY - element.offsetTop;
-                    const walkX = (x - startX) * 2;
-                    const walkY = (y - startY) * 2;
-                    element.scrollLeft = scrollLeft - walkX;
-                    element.scrollTop = scrollTop - walkY;
-                });
-                
-                element.addEventListener('mouseup', function() {
-                    isMoving = false;
-                    element.style.cursor = 'zoom-out';
-                });
-                
-                element.addEventListener('mouseleave', function() {
-                    isMoving = false;
-                    element.style.cursor = 'zoom-out';
-                });
-            }
-        }
-        
         function closeGalleryModal() {
             const modal = document.getElementById('galleryModal');
-            // Reset zoom auf allen Bildern
-            document.querySelectorAll('.gallery-modal-image-wrapper.zoomed').forEach(el => {
-                el.classList.remove('zoomed');
-            });
             modal.classList.remove('active');
             document.body.style.overflow = '';
         }
@@ -3062,27 +2892,6 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Logo Cache-Buster und Error Handling
-            const logoImage = document.getElementById('logo-image');
-            if (logoImage) {
-                // Füge Timestamp hinzu um Cache zu vermeiden
-                const timestamp = new Date().getTime();
-                const logoSrc = logoImage.src.split('?')[0]; // Entferne alte query params
-                logoImage.src = `${logoSrc}?v=${timestamp}`;
-                
-                // Fehlerbehandlung falls Logo nicht lädt
-                logoImage.onerror = function() {
-                    console.log('Logo konnte nicht geladen werden, verwende Fallback');
-                    this.style.display = 'none';
-                    this.parentElement.innerHTML = '<i class="fas fa-home" style="font-size: 2rem; color: var(--accent);"></i>';
-                };
-                
-                // Erfolg-Log
-                logoImage.onload = function() {
-                    console.log('Logo erfolgreich geladen:', this.src);
-                };
-            }
-            
             // Back to Top Button
             const backToTopBtn = document.getElementById('backToTop');
             
