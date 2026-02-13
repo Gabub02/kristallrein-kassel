@@ -890,31 +890,28 @@
 
         .gallery-images {
             display: flex;
+            flex-direction: column;
             position: relative;
-            min-height: 400px;
         }
 
         .gallery-image-side {
-            width: 50%;
+            width: 100%;
             position: relative;
             overflow: hidden;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            min-height: 400px;
+            min-height: 300px;
         }
         
         .gallery-before {
-            border-right: 3px solid var(--white);
+            border-bottom: 3px solid var(--white);
         }
         
         /* Desktop: Voller Bildinhalt sichtbar */
         @media (min-width: 769px) {
-            .gallery-images {
-                min-height: 450px;
-            }
             .gallery-image-side {
-                min-height: 450px;
+                min-height: 350px;
             }
         }
 
@@ -947,20 +944,9 @@
                 margin: 0;
             }
             
-            .gallery-images {
-                flex-direction: column;
-                min-height: auto;
-            }
-            
             .gallery-image-side {
-                width: 100%;
-                min-height: 300px;
+                min-height: 250px;
                 background-size: cover;
-            }
-            
-            .gallery-before {
-                border-right: none;
-                border-bottom: 3px solid var(--white);
             }
             
             .gallery-badge {
@@ -1042,12 +1028,14 @@
             cursor: zoom-in;
             transition: var(--transition);
             max-width: 100%;
-            overflow: hidden;
+            overflow: auto;
             border-radius: var(--border-radius);
+            max-height: 70vh;
         }
         
         .gallery-modal-image-wrapper.zoomed {
             cursor: zoom-out;
+            overflow: auto;
         }
         
         .gallery-modal img {
@@ -1057,11 +1045,13 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease;
             display: block;
+            object-fit: contain;
         }
         
         .gallery-modal-image-wrapper.zoomed img {
-            transform: scale(1.5);
+            transform: scale(2);
             cursor: move;
+            transform-origin: top left;
         }
         
         .zoom-hint {
@@ -2010,7 +2000,7 @@
                 </div>
                 <div class="cookie-buttons">
                     <button class="cookie-btn cookie-accept" id="acceptCookies">Alle akzeptieren</button>
-                    <button class="cookie-btn cookie-settings" id="cookieSettings">Ablehnen</button>
+                    <button class="cookie-btn cookie-settings" id="cookieSettings">Nur notwendige</button>
                 </div>
             </div>
         </div>
@@ -2534,11 +2524,11 @@
             
             if (type === 'buero') {
                 imageHTML = `
-                    <div style="width: 100%; max-width: 1400px; margin: 0 auto;">
+                    <div style="width: 100%; max-width: 900px; margin: 0 auto;">
                         <h2 style="color: white; text-align: center; font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 30px;">
                             <i class="fas fa-building"></i> Büro-Reinigung: Vorher & Nachher
                         </h2>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 20px;">
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
                             <div style="text-align: center;">
                                 <div style="background: linear-gradient(135deg, #999 0%, #666 100%); color: white; padding: 12px; border-radius: 10px 10px 0 0; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;">VORHER</div>
                                 <div class="gallery-modal-image-wrapper" onclick="toggleZoom(this)">
@@ -2592,50 +2582,62 @@
             document.querySelectorAll('.gallery-modal-image-wrapper.zoomed').forEach(el => {
                 if (el !== element) {
                     el.classList.remove('zoomed');
+                    el.scrollTop = 0;
+                    el.scrollLeft = 0;
                 }
             });
             
             if (isZoomed) {
                 element.classList.remove('zoomed');
+                element.scrollTop = 0;
+                element.scrollLeft = 0;
             } else {
                 element.classList.add('zoomed');
                 
-                // Mouse-move für Pan-Funktion beim Zoom
-                const img = element.querySelector('img');
+                // Touch support für mobile Geräte
                 let isMoving = false;
                 let startX, startY, scrollLeft, scrollTop;
                 
-                element.addEventListener('mousedown', function(e) {
+                const handleStart = function(e) {
                     if (element.classList.contains('zoomed')) {
                         isMoving = true;
-                        startX = e.pageX - element.offsetLeft;
-                        startY = e.pageY - element.offsetTop;
+                        const touch = e.type.includes('touch') ? e.touches[0] : e;
+                        startX = touch.pageX;
+                        startY = touch.pageY;
                         scrollLeft = element.scrollLeft;
                         scrollTop = element.scrollTop;
                         element.style.cursor = 'grabbing';
+                        e.preventDefault();
                     }
-                });
+                };
                 
-                element.addEventListener('mousemove', function(e) {
+                const handleMove = function(e) {
                     if (!isMoving) return;
                     e.preventDefault();
-                    const x = e.pageX - element.offsetLeft;
-                    const y = e.pageY - element.offsetTop;
-                    const walkX = (x - startX) * 2;
-                    const walkY = (y - startY) * 2;
+                    const touch = e.type.includes('touch') ? e.touches[0] : e;
+                    const x = touch.pageX;
+                    const y = touch.pageY;
+                    const walkX = (x - startX) * 1.5;
+                    const walkY = (y - startY) * 1.5;
                     element.scrollLeft = scrollLeft - walkX;
                     element.scrollTop = scrollTop - walkY;
-                });
+                };
                 
-                element.addEventListener('mouseup', function() {
+                const handleEnd = function() {
                     isMoving = false;
                     element.style.cursor = 'zoom-out';
-                });
+                };
                 
-                element.addEventListener('mouseleave', function() {
-                    isMoving = false;
-                    element.style.cursor = 'zoom-out';
-                });
+                // Mouse events
+                element.addEventListener('mousedown', handleStart);
+                element.addEventListener('mousemove', handleMove);
+                element.addEventListener('mouseup', handleEnd);
+                element.addEventListener('mouseleave', handleEnd);
+                
+                // Touch events
+                element.addEventListener('touchstart', handleStart, {passive: false});
+                element.addEventListener('touchmove', handleMove, {passive: false});
+                element.addEventListener('touchend', handleEnd);
             }
         }
         
@@ -2843,14 +2845,40 @@
                     DSGVO) sofern diese abgefragt wurde.</p>
                     
                     <h3>6. Cookies</h3>
+                    <h4>Welche Cookies verwenden wir?</h4>
                     <p>Unsere Website verwendet Cookies. Das sind kleine Textdateien, die Ihr Webbrowser auf Ihrem 
                     Endgerät speichert. Cookies helfen uns dabei, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen.</p>
-                    <p>Einige Cookies sind "Session-Cookies." Solche Cookies werden nach Ende Ihrer Browser-Sitzung von selbst gelöscht. 
-                    Hingegen bleiben andere Cookies auf Ihrem Endgerät bestehen, bis Sie diese selbst löschen. Solche Cookies helfen uns, 
-                    Sie bei Rückkehr auf unserer Website wiederzuerkennen.</p>
+                    
+                    <h4>Notwendige Cookies</h4>
+                    <p>Diese Cookies sind für die Grundfunktionen der Website erforderlich und können nicht deaktiviert werden:</p>
+                    <ul>
+                        <li><strong>cookiesAccepted:</strong> Speichert Ihre Cookie-Präferenz (Alle akzeptiert oder nur notwendige). 
+                        Speicherdauer: 12 Monate. Zweck: Verhindert wiederholte Cookie-Abfragen.</li>
+                        <li><strong>cookiesDate:</strong> Speichert das Datum Ihrer Cookie-Entscheidung. 
+                        Speicherdauer: 12 Monate. Zweck: Dokumentation Ihrer Einwilligung.</li>
+                    </ul>
+                    
+                    <h4>Funktionale Cookies</h4>
+                    <p>Diese Cookies werden nur gesetzt, wenn Sie "Alle akzeptieren" wählen:</p>
+                    <ul>
+                        <li><strong>Session-Cookies:</strong> Temporäre Cookies für die Dauer Ihres Besuchs. 
+                        Speicherdauer: Bis zum Schließen des Browsers. Zweck: Verbesserung der Benutzererfahrung.</li>
+                    </ul>
+                    
+                    <h4>Ihre Cookie-Einstellungen verwalten</h4>
+                    <p>Sie haben jederzeit die Möglichkeit, Ihre Cookie-Einstellungen zu ändern:</p>
+                    <ul>
+                        <li><strong>"Alle akzeptieren":</strong> Alle Cookies werden gesetzt (notwendige + funktionale)</li>
+                        <li><strong>"Nur notwendige":</strong> Nur technisch notwendige Cookies werden gesetzt</li>
+                    </ul>
+                    
                     <p>Mit einem modernen Webbrowser können Sie das Setzen von Cookies überwachen, einschränken oder unterbinden. 
                     Viele Webbrowser lassen sich so konfigurieren, dass Cookies mit dem Schließen des Programms von selbst gelöscht 
                     werden. Die Deaktivierung von Cookies kann eine eingeschränkte Funktionalität unserer Website zur Folge haben.</p>
+                    
+                    <h4>Keine Tracking- oder Analyse-Cookies</h4>
+                    <p>Wir verwenden keine Tracking-Cookies von Drittanbietern wie Google Analytics, Facebook Pixel oder ähnliche 
+                    Tracking-Technologien. Ihre Privatsphäre ist uns wichtig.</p>
                     
                     <h3>7. Ihre Rechte</h3>
                     <p>Sie haben folgende Rechte bezüglich Ihrer bei uns gespeicherten Daten:</p>
@@ -3140,8 +3168,26 @@
             });
             
             cookieSettingsBtn.addEventListener('click', function() {
-                localStorage.setItem('cookiesAccepted', 'declined');
+                localStorage.setItem('cookiesAccepted', 'necessary-only');
+                localStorage.setItem('cookiesDate', new Date().toISOString());
                 cookieBanner.classList.remove('active');
+                
+                // Erfolgsbenachrichtigung anzeigen
+                const notification = document.createElement('div');
+                notification.style.cssText = 'position: fixed; top: 20px; right: 20px; background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%); color: white; padding: 20px 30px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4); z-index: 10000; font-weight: 600; animation: slideInRight 0.5s ease;';
+                notification.innerHTML = '<i class="fas fa-info-circle" style="margin-right: 10px;"></i>Nur notwendige Cookies aktiviert.';
+                document.body.appendChild(notification);
+                
+                // Animation hinzufügen
+                const style = document.createElement('style');
+                style.textContent = '@keyframes slideInRight { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }';
+                document.head.appendChild(style);
+                
+                // Benachrichtigung nach 3 Sekunden ausblenden
+                setTimeout(() => {
+                    notification.style.animation = 'slideInRight 0.5s ease reverse';
+                    setTimeout(() => notification.remove(), 500);
+                }, 3000);
             });
             
             // Header Scroll Effect
