@@ -230,6 +230,16 @@
             transform: translateY(-2px);
         }
 
+        .cookie-decline {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cookie-decline:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
         .cookie-settings {
             background: transparent;
             color: var(--white);
@@ -238,6 +248,145 @@
 
         .cookie-settings:hover {
             background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Cookie Settings Modal */
+        .cookie-modal {
+            display: none;
+            position: fixed;
+            z-index: 10001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .cookie-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cookie-modal-content {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s ease;
+            margin: 20px;
+        }
+
+        .cookie-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text);
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cookie-modal-close:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        .cookie-category {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: var(--light);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .cookie-category h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cookie-category p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .cookie-toggle {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .cookie-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .cookie-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 26px;
+        }
+
+        .cookie-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .cookie-slider {
+            background-color: var(--accent);
+        }
+
+        input:disabled + .cookie-slider {
+            background-color: #999;
+            cursor: not-allowed;
+        }
+
+        input:checked + .cookie-slider:before {
+            transform: translateX(24px);
+        }
+
+        .cookie-modal-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .cookie-modal-buttons button {
+            flex: 1;
+            min-width: 150px;
         }
 
         /* ===== HEADER ===== */
@@ -1995,12 +2144,14 @@
         <div class="container">
             <div class="cookie-content">
                 <div class="cookie-text">
-                    <h3>🍪 Cookies & Datenschutz</h3>
-                    <p>Wir verwenden Cookies, um Ihnen das beste Erlebnis auf unserer Website zu bieten. Weitere Informationen finden Sie in unserer <a href="#datenschutz">Datenschutzerklärung</a>.</p>
+                    <h3>🍪 Cookies verwalten</h3>
+                    <p>Cookies und ähnliche Technologien sammeln bestimmte Informationen darüber, wie du unsere Website nutzt. Einige davon sind unbedingt erforderlich, und ohne sie kannst du unsere Website nicht verwenden. Andere wiederum sind optional und du kannst selbst entscheiden, ob wir sie verwenden dürfen oder nicht.</p>
+                    <p>Du willst noch mehr Informationen? <a href="javascript:void(0);" onclick="showLegalModal('datenschutz')" style="color: var(--accent); text-decoration: underline;">Hier findest du unsere vollständige Datenschutzerklärung</a>.</p>
                 </div>
                 <div class="cookie-buttons">
                     <button class="cookie-btn cookie-accept" id="acceptCookies">Alle akzeptieren</button>
-                    <button class="cookie-btn cookie-settings" id="cookieSettings">Nur notwendige</button>
+                    <button class="cookie-btn cookie-decline" id="cookieDecline">Alle ablehnen</button>
+                    <button class="cookie-btn cookie-settings" id="cookieSettings">Einstellungen</button>
                 </div>
             </div>
         </div>
@@ -2162,7 +2313,7 @@
             <div class="section-header">
                 <div class="section-badge">Unsere Referenzen</div>
                 <h2 class="section-title">Verwandlungskunst in Perfektion</h2>
-                <p class="section-subtitle">Bilder sagen mehr als Worte. Sehen Sie selbst, wie wir Räume verwandeln.</p>
+                <p class="section-subtitle">Bilder sagen mehr als tausend Worte. Sehen Sie selbst, wie wir Räume in neuem Glanz erstrahlen lassen.</p>
             </div>
 
             <div class="gallery-grid">
@@ -3100,9 +3251,27 @@
                 
                 // Fehlerbehandlung falls Logo nicht lädt
                 logoImage.onerror = function() {
-                    console.log('Logo konnte nicht geladen werden, verwende Fallback');
-                    this.style.display = 'none';
-                    this.parentElement.innerHTML = '<i class="fas fa-home" style="font-size: 2rem; color: var(--accent);"></i>';
+                    console.log('Logo konnte nicht geladen werden');
+                    // Versuche alternative Pfade
+                    const alternatives = [
+                        'Logomit%23152D51.png',
+                        './Logomit#152D51.png',
+                        '/Logomit%23152D51.png'
+                    ];
+                    
+                    let tried = 0;
+                    const tryNextPath = () => {
+                        if (tried < alternatives.length) {
+                            this.src = alternatives[tried] + '?v=' + new Date().getTime();
+                            tried++;
+                        } else {
+                            // Alle Versuche fehlgeschlagen, zeige Fallback
+                            this.style.display = 'none';
+                            this.parentElement.innerHTML = '<i class="fas fa-sparkles" style="font-size: 2rem; color: var(--accent);"></i>';
+                        }
+                    };
+                    
+                    tryNextPath();
                 };
                 
                 // Erfolg-Log
@@ -3144,51 +3313,153 @@
                 }, 1000);
             }
             
+            // Cookie Modal erstellen
+            const cookieModal = document.createElement('div');
+            cookieModal.className = 'cookie-modal';
+            cookieModal.id = 'cookieModal';
+            cookieModal.innerHTML = `
+                <div class="cookie-modal-content">
+                    <button class="cookie-modal-close" onclick="closeCookieModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <h2 style="margin-bottom: 25px; color: var(--dark);">Cookie-Einstellungen</h2>
+                    
+                    <div class="cookie-category">
+                        <h4>
+                            Unverzichtbare Cookies
+                            <label class="cookie-toggle">
+                                <input type="checkbox" checked disabled>
+                                <span class="cookie-slider"></span>
+                            </label>
+                        </h4>
+                        <p>Diese Cookies sind immer aktiv, da sie für das Funktionieren und die Sicherheit von unserer Website unerlässlich sind. Ohne diese Cookies können die von dir angeforderten Dienste nicht bereitgestellt werden.</p>
+                    </div>
+                    
+                    <div class="cookie-category">
+                        <h4>
+                            Funktions-Cookies
+                            <label class="cookie-toggle">
+                                <input type="checkbox" id="functionalCookies">
+                                <span class="cookie-slider"></span>
+                            </label>
+                        </h4>
+                        <p>Diese Cookies helfen uns, dir eine verbesserte Funktionalität und Personalisierung zu bieten und deine Einstellungen zu speichern. Sie können von uns oder von Drittanbietern eingerichtet werden.</p>
+                    </div>
+                    
+                    <div class="cookie-category">
+                        <h4>
+                            Leistungs-Cookies
+                            <label class="cookie-toggle">
+                                <input type="checkbox" id="performanceCookies">
+                                <span class="cookie-slider"></span>
+                            </label>
+                        </h4>
+                        <p>Diese Cookies helfen uns zu analysieren, wie viele Personen unsere Website nutzen, woher sie kommen und wie sie unsere Website nutzen. Wenn du diese Cookies deaktivierst, können wir kein Feedback erhalten, um unsere Website für dich und alle unsere Nutzer zu verbessern.</p>
+                    </div>
+                    
+                    <div class="cookie-category">
+                        <h4>
+                            Zielgerichtete Cookies
+                            <label class="cookie-toggle">
+                                <input type="checkbox" id="targetingCookies">
+                                <span class="cookie-slider"></span>
+                            </label>
+                        </h4>
+                        <p>Diese Cookies werden von unseren Werbepartnern gesetzt, um deine Aktivitäten zu verfolgen und dir relevante Werbung auf anderen Websites zu zeigen, während du im Internet surfst.</p>
+                    </div>
+                    
+                    <div class="cookie-modal-buttons">
+                        <button class="cookie-btn cookie-accept" onclick="saveCookieSettings()">Auswahl bestätigen</button>
+                        <button class="cookie-btn cookie-accept" onclick="acceptAllCookiesFromModal()">Alle akzeptieren</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(cookieModal);
+            
+            window.closeCookieModal = function() {
+                cookieModal.classList.remove('active');
+                document.body.style.overflow = '';
+            };
+            
+            window.saveCookieSettings = function() {
+                const functional = document.getElementById('functionalCookies').checked;
+                const performance = document.getElementById('performanceCookies').checked;
+                const targeting = document.getElementById('targetingCookies').checked;
+                
+                const settings = {
+                    necessary: true,
+                    functional: functional,
+                    performance: performance,
+                    targeting: targeting
+                };
+                
+                localStorage.setItem('cookieSettings', JSON.stringify(settings));
+                localStorage.setItem('cookiesAccepted', 'custom');
+                localStorage.setItem('cookiesDate', new Date().toISOString());
+                
+                cookieBanner.classList.remove('active');
+                closeCookieModal();
+                showNotification('Ihre Cookie-Einstellungen wurden gespeichert.', 'success');
+            };
+            
+            window.acceptAllCookiesFromModal = function() {
+                document.getElementById('functionalCookies').checked = true;
+                document.getElementById('performanceCookies').checked = true;
+                document.getElementById('targetingCookies').checked = true;
+                saveCookieSettings();
+            };
+            
             acceptCookiesBtn.addEventListener('click', function() {
-                localStorage.setItem('cookiesAccepted', 'true');
+                const settings = {
+                    necessary: true,
+                    functional: true,
+                    performance: true,
+                    targeting: true
+                };
+                localStorage.setItem('cookieSettings', JSON.stringify(settings));
+                localStorage.setItem('cookiesAccepted', 'all');
                 localStorage.setItem('cookiesDate', new Date().toISOString());
                 cookieBanner.classList.remove('active');
-                
-                // Erfolgsbenachrichtigung anzeigen
-                const notification = document.createElement('div');
-                notification.style.cssText = 'position: fixed; top: 20px; right: 20px; background: linear-gradient(135deg, #00b894 0%, #00a085 100%); color: white; padding: 20px 30px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 184, 148, 0.4); z-index: 10000; font-weight: 600; animation: slideInRight 0.5s ease;';
-                notification.innerHTML = '<i class="fas fa-check-circle" style="margin-right: 10px;"></i>Cookies akzeptiert! Vielen Dank.';
-                document.body.appendChild(notification);
-                
-                // Animation hinzufügen
-                const style = document.createElement('style');
-                style.textContent = '@keyframes slideInRight { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }';
-                document.head.appendChild(style);
-                
-                // Benachrichtigung nach 3 Sekunden ausblenden
-                setTimeout(() => {
-                    notification.style.animation = 'slideInRight 0.5s ease reverse';
-                    setTimeout(() => notification.remove(), 500);
-                }, 3000);
+                showNotification('Alle Cookies wurden akzeptiert! Vielen Dank.', 'success');
             });
             
-            cookieSettingsBtn.addEventListener('click', function() {
+            const cookieDeclineBtn = document.getElementById('cookieDecline');
+            cookieDeclineBtn.addEventListener('click', function() {
+                const settings = {
+                    necessary: true,
+                    functional: false,
+                    performance: false,
+                    targeting: false
+                };
+                localStorage.setItem('cookieSettings', JSON.stringify(settings));
                 localStorage.setItem('cookiesAccepted', 'necessary-only');
                 localStorage.setItem('cookiesDate', new Date().toISOString());
                 cookieBanner.classList.remove('active');
-                
-                // Erfolgsbenachrichtigung anzeigen
+                showNotification('Alle optionalen Cookies wurden abgelehnt.', 'info');
+            });
+            
+            cookieSettingsBtn.addEventListener('click', function() {
+                cookieBanner.classList.remove('active');
+                cookieModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            function showNotification(message, type) {
                 const notification = document.createElement('div');
-                notification.style.cssText = 'position: fixed; top: 20px; right: 20px; background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%); color: white; padding: 20px 30px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4); z-index: 10000; font-weight: 600; animation: slideInRight 0.5s ease;';
-                notification.innerHTML = '<i class="fas fa-info-circle" style="margin-right: 10px;"></i>Nur notwendige Cookies aktiviert.';
+                const bgColor = type === 'success' ? 'linear-gradient(135deg, #00b894 0%, #00a085 100%)' : 'linear-gradient(135deg, #0066cc 0%, #0052a3 100%)';
+                notification.style.cssText = `position: fixed; top: 20px; right: 20px; background: ${bgColor}; color: white; padding: 20px 30px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); z-index: 10000; font-weight: 600; animation: slideInRight 0.5s ease;`;
+                notification.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : 'info'}-circle" style="margin-right: 10px;"></i>${message}`;
                 document.body.appendChild(notification);
                 
-                // Animation hinzufügen
                 const style = document.createElement('style');
                 style.textContent = '@keyframes slideInRight { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }';
                 document.head.appendChild(style);
                 
-                // Benachrichtigung nach 3 Sekunden ausblenden
                 setTimeout(() => {
                     notification.style.animation = 'slideInRight 0.5s ease reverse';
                     setTimeout(() => notification.remove(), 500);
                 }, 3000);
-            });
+            }
             
             // Header Scroll Effect
             const header = document.getElementById('main-header');
